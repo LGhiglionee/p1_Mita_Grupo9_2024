@@ -1,18 +1,17 @@
+import CRUD
+
 alumnos= [
-    ['Legajo','Nombre', 'Apellido', 'Fecha Nacimiento', 'Sexo'],
-    [1223445, 'Nombre alumno', 'Apellido Alumno', 'Genero del album', 'Genero alumno']
+    ['Legajo','Nombre', 'Apellido'],
+    [1223445, 'Nombre alumno', 'Apellido Alumno']
     ]
 
 materias = [
-    ['Codigo','Nombre', 'Turno', 'Profesor', 'Sede'],
-    [1245, 'Nombre materia', 'Turno de clase', 'Profesor Asignado', 'Sede']
+    ['Codigo','Nombre', 'Turno'],
+    [1245, 'Nombre materia', 'Turno de clase']
     ]
 
-inscripciones = [
-    ['ID inscripcion','Legajo', 'Codigo Materia', 'Fecha inscripcion'],
-    [1522, 1223445 , 1245 , 'Fecha']
-    ]
 Calificaciones = [
-    ['Legajo','Calificacion',],
-    [1223445 , 1-10]
+    ['Legajo', 'Codigo Materia', 'Calificacion'],
+    [1223445, 31245, 1-10]
     ]
+
