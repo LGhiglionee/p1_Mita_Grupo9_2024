@@ -15,7 +15,7 @@ def mostrarmatrizalumnos_ordenada(matrizalumnos):
 
 def mostrarmatriznotas_ordenada(matriznotas):
     for fila in matriznotas:
-        cad = ' | '.join(f'{elemento:<25}' for elemento in fila)
+        cad = ' | '.join(f'{elemento:<8}' for elemento in fila)
         print(cad)
 
 def mostrarmatrizmaterias_ordenada(matrizmaterias):
