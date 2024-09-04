@@ -1,7 +1,7 @@
-from Crud import agregar_alumno, eliminar_alumno, leer_alumno, actualizar_alumno, leer_nota, agregar_nota, actualizar_nota
-from Matrices import crearmatriz_alumnos, random , crearmatriz_materias , crearmatriz_notas
-from Diseno import mostrarmatrizalumnos_ordenada, menu, mostrarmatriznotas_ordenada, mostrarmatrizmaterias_ordenada
-from Login import inicio, registrar_usuario
+from Crud import *
+from Matrices import *
+from Diseno import *
+from Login import *
 
 cantalum = random.randint(0,30)
 cantmat=60
