@@ -1,11 +1,14 @@
 def registro(usuario):#registro de usuarios
 
-    user = input('ingrese su nuevo usuario: ')
-    contra = input('ingrese su nueva contra: ')
+    nombre_usuario = input('ingrese su nuevo usuario: ')
+    contrasena = input('ingrese su nueva contra: ')
 
-    usuario[user] = {'contrasena' : contra}
-        
-    print(usuario)
+    usuario[nombre_usuario] = {'contrasena' : contrasena}
+    
+    if nombre_usuario in usuario:# verifica en caso de repeticion de usuarios
+        if usuario[nombre_usuario]['contrasena'] == contrasena:
+            print('su usuario ya cuenta con un registro')
+            
     return usuario
 
 
