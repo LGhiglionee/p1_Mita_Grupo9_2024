@@ -18,22 +18,26 @@ def main():
         print('1. No tienes usuario? Registrate')
         print('2. Iniciar Sesion')
         print('3. Salir')
-        opcionlog=int(input('Ingrese el numero, 1-3: ' ))
+        opcionlog = int(input('Ingrese el numero, 1-3: ' ))
         if opcionlog == 1:
             registro(usuario)
         elif opcionlog == 2:
-            if inicio(usuario)==1:
-                opcion= 0
+            if inicio(usuario) == 1:
+                opcion = 0
+                
                 matrizalumnos= crearmatriz_alumnos(cantalum)
-                matrizmaterias= crearmatriz_materias(cantmat)
+                matrizmaterias= crearmatriz_materias()
                 matriznotas= crearmatriz_notas(matrizalumnos, matrizmaterias)    
-                while opcion !=8:
+                
+                while opcion != 8:
                     mostrarmatrizalumnos_ordenada(matrizalumnos)
                     print()
+                    
                     mostrarmatrizmaterias_ordenada(matrizmaterias)
                     print()
+                    
                     mostrarmatriznotas_ordenada(matriznotas)
-                    menu()
+                    print()
                     opcion = int(input('Ingrese la acción que desee, indicando su número: '))
                     if opcion == 1:
                         agregar_alumno(matrizalumnos)
