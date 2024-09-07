@@ -1,20 +1,26 @@
+from random import *
 from Crud import *
-from Matrices import *
+from Arimetricas import * 
 from Diseno import *
+from Matrices import *
 from Login import *
 
-cantalum = random.randint(0,30)
+cantalum = random.randint(0,30 )
 cantmat=60
 
 def main():
-    usuario= {}
+    usuario = {
+        'root': {
+            'contrasena' : 'pass',
+        }
+        }#usuario root para saltear el paso de crear un usuario.
     while True:
         print('1. No tienes usuario? Registrate')
         print('2. Iniciar Sesion')
         print('3. Salir')
         opcionlog=int(input('Ingrese el numero, 1-3: ' ))
         if opcionlog == 1:
-            registrar_usuario(usuario)
+            registro(usuario)
         elif opcionlog == 2:
             if inicio(usuario)==1:
                 opcion= 0
