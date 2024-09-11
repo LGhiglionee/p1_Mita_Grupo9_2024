@@ -6,11 +6,12 @@ from Login import *
 
 cantalum = random.randint(0,30 )
 def main():
+    #usuario root para saltear el paso de crear un usuario.
     usuario = {
         'root': {
             'contrasena' : 'pass',
         }
-        }#usuario root para saltear el paso de crear un usuario.
+        }
     while True:
         print('1. No tienes usuario? Registrate')
         print('2. Iniciar Sesion')
@@ -22,9 +23,9 @@ def main():
             if inicio(usuario) == 1:
                 opcion = 0
                 
-                matrizalumnos= crearmatriz_alumnos(cantalum)
-                matrizmaterias= crearmatriz_materias()
-                matriznotas= crearmatriz_notas(matrizalumnos)    
+                matrizalumnos = crearmatriz_alumnos(cantalum)
+                matrizmaterias = crearmatriz_materias()
+                matriznotas = crearmatriz_notas(matrizalumnos)    
                 combinado = combineta(matrizalumnos, matrizmaterias, matriznotas)
                 while opcion != 8:
                     encabezados(combinado)
@@ -49,8 +50,12 @@ def main():
                     else:
                         print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 5.')
                     #Se podria usar un try por si no se pone un numero
-
+        
         elif opcionlog == 3:
             print('Saliendo....')
             break
+        else:
+            print()
+            print('Ingreso un valor que no corresponde, repita el proceso')
+            print()
 main()
