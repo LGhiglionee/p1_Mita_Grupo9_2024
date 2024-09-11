@@ -1,13 +1,10 @@
 from random import *
-from Crud import *
-from Arimetricas import * 
+from Crud import * 
 from Diseno import *
 from Matrices import *
 from Login import *
 
 cantalum = random.randint(0,30 )
-cantmat=60
-
 def main():
     usuario = {
         'root': {
@@ -27,17 +24,11 @@ def main():
                 
                 matrizalumnos= crearmatriz_alumnos(cantalum)
                 matrizmaterias= crearmatriz_materias()
-                matriznotas= crearmatriz_notas(matrizalumnos, matrizmaterias)    
-                
+                matriznotas= crearmatriz_notas(matrizalumnos)    
+                combinado = combineta(matrizalumnos, matrizmaterias, matriznotas)
                 while opcion != 8:
-                    mostrarmatrizalumnos_ordenada(matrizalumnos)
-                    print()
-                    
-                    mostrarmatrizmaterias_ordenada(matrizmaterias)
-                    print()
-                    
-                    mostrarmatriznotas_ordenada(matriznotas)
-                    print()
+                    encabezados(combinado)
+                    menu()
                     opcion = int(input('Ingrese la acción que desee, indicando su número: '))
                     if opcion == 1:
                         agregar_alumno(matrizalumnos)
@@ -62,5 +53,4 @@ def main():
         elif opcionlog == 3:
             print('Saliendo....')
             break
-
 main()
