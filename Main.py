@@ -26,13 +26,13 @@ def main():
                 matrizalumnos = crearmatriz_alumnos(cantalum)
                 matrizmaterias = crearmatriz_materias()
                 matriznotas = crearmatriz_notas(matrizalumnos)    
-                combinado = combineta(matrizalumnos, matrizmaterias, matriznotas)
+                combinados = combinado(matrizalumnos, matrizmaterias, matriznotas)
                 while opcion != 8:
-                    encabezados(combinado)
+                    encabezados(combinados)
                     menu()
                     opcion = int(input('Ingrese la acción que desee, indicando su número: '))
                     if opcion == 1:
-                        agregar_alumno(matrizalumnos)
+                        combinados = agregar_alumno(combinados, matrizmaterias)
                     elif opcion == 2:
                         leer_alumno(matrizalumnos)
                     elif opcion == 3:
@@ -47,6 +47,8 @@ def main():
                         actualizar_nota(matriznotas)
                     elif opcion == 8:
                         print('Saliendo...')
+                    elif opcion == 9:
+                        mostrar(combinado)
                     else:
                         print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 5.')
                     #Se podria usar un try por si no se pone un numero

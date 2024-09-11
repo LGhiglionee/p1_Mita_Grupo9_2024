@@ -28,7 +28,7 @@ def crearmatriz_materias():
         while codigo in codigos_rep:
             codigo = random.randint(1, 1324)
         turno = random.choice(['Mañana', 'Tarde', 'Noche'])
-        materia = random.choice(['Programacion I', 'Fundamentos de Quimica', 'Sistemas de Representacion', 'Matematica Discreta', 'Algebra', 'Arquitectura de computadores'])
+        materia = random.choice(['Programacion I', 'Quimíca', 'Sistemas I', 'Matematica Discreta', 'Algebra', 'Física'])
         codigos_rep.append(codigo)
         matriz_materias.append(
                 {
@@ -67,7 +67,7 @@ def crearmatriz_notas(matrizalumnos):
         )
     return matriznotas
 
-def combineta(matrizalumnos, matrizmateria, matriznotas):
+def combinado(matrizalumnos, matrizmateria, matriznotas):
     matriz_combinada = []
     for alumno, materia, nota in zip(matrizalumnos, matrizmateria, matriznotas):
         combinado = {
