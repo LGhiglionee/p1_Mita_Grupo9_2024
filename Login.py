@@ -1,14 +1,20 @@
 def registro(usuario):#registro de usuarios
-
-    nombre_usuario = input('ingrese su nuevo usuario: ')
-    contrasena = input('ingrese su nueva contra: ')
-
-    usuario[nombre_usuario] = {'contrasena' : contrasena}
-    
-    if nombre_usuario in usuario:# verifica en caso de repeticion de usuarios
-        if usuario[nombre_usuario]['contrasena'] == contrasena:
-            print('su usuario ya cuenta con un registro')
-            
+    flag = 0
+    while flag == 0:
+        nombre_usuario = input('ingrese su nuevo usuario: ')
+        contrasena = input('ingrese su nueva contra: ')
+        
+        if nombre_usuario in usuario:# verifica en caso de repeticion de usuarios
+            if usuario[nombre_usuario]['contrasena'] == contrasena:
+                print('su usuario ya cuenta con un registro')
+                print()
+                confirm = input('Desea cancelar su registro? [y/n]: ')
+                print()
+                if confirm in ['y', 'yes', 'Yes', 'YES', 'Y']:
+                    flag = 1
+        else:
+            usuario[nombre_usuario] = {'contrasena' : contrasena}
+            flag = 1    
     return usuario
 
 
