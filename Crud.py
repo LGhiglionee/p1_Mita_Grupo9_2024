@@ -1,9 +1,27 @@
-def agregar_alumno(matrizalumnos):
-    legajo= int(input('Ingrese el legajo: '))
-    nombre= input('Ingrese el nombre: ')
-    apellido= input('Ingrese el apellido: ')
-    matrizalumnos.append([legajo, nombre, apellido])
-
+import random
+def agregar_alumno(combinado, matrizmateria):
+    legajo = int(input('Ingrese el legajo: '))
+    nombre = input('Ingrese el nombre: ')
+    apellido = input('Ingrese el apellido: ')
+    
+    # Seleccionar una materia aleatoria
+    materia = random.choice(matrizmateria)
+    
+    # Crear nuevo alumno con datos de materia y notas iniciales
+    nuevo_alumno = {
+        'Legajos': legajo,
+        'Nombres': nombre,
+        'Apellidos': apellido,
+        'Turnos': materia['Turnos'],
+        'Materias': materia['Materias'],
+        'Código': materia['Código'],
+        'Parcial 1': '-',
+        'Parcial 2': '-',
+        'Final': '-'
+    }
+    
+    combinado.append(nuevo_alumno)
+    return combinado
 def leer_alumno(matrizalumnos):
     legajo=int(input('Ingrese el legajo del alumno que desea buscar: '))
     for alumno in matrizalumnos:
