@@ -1,3 +1,5 @@
+from Matrices import *
+
 def menu():
     print('1. Agregar alumno')
     print('2. Leer alumno')
@@ -7,18 +9,11 @@ def menu():
     print('6. Agregar nota')
     print('7. Actualizar nota')
     print('8. Salir')
-
-def mostrarmatrizalumnos_ordenada(matrizalumnos):
-    for fila in matrizalumnos:
-        cad = ' | '.join(f'{elemento:<25}' for elemento in fila)
-        print(cad)
-
-def mostrarmatriznotas_ordenada(matriznotas):
-    for fila in matriznotas:
-        cad = ' | '.join(f'{elemento:<8}' for elemento in fila)
-        print(cad)
-
-def mostrarmatrizmaterias_ordenada(matrizmaterias):
-    for fila in matrizmaterias:
-        cad = ' | '.join(f'{elemento:<25}' for elemento in fila)
-        print(cad)
+    return
+def encabezados(x):# x == cualquier matriz, en un futuro si se unifica va ser más cómodo
+    claves = x[0].keys()
+    encabezado = " | ".join(f"{clave:<19}" for clave in claves)
+    print(encabezado)
+    for fila in x:
+        cadena = " | ".join(f"{str(fila.get(clave)):<19}" for clave in claves)
+        print(cadena)
