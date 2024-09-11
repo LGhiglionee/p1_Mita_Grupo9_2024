@@ -17,3 +17,6 @@ def encabezados(x):# x == cualquier matriz, en un futuro si se unifica va ser m√
     for fila in x:
         cadena = " | ".join(f"{str(fila.get(clave)):<19}" for clave in claves)
         print(cadena)
+#errores en un futuro en dise√±o
+def mostrar(x):
+    encabezados(x)
