@@ -1,44 +1,42 @@
 import random
 
-def crearmatriz_alumnos(cantalum):
-    matrizalumnos = []
-    while cantalum>=1:
+def diccio_alumnos(x):
+    diccalumnos = []
+    while x>=1:
         legajo = random.randint(0,999999999)
         cad = str(legajo).zfill(9)
         nombre = random.choice(['Lucas', 'Maximo', 'Franco', 'Felipe', 'Noah', 'Juan', 'Guillermo', 'Pablo', 'Agustin'])
         apellido = random.choice(['Ghiglione','Bramuglia','Collura','Remonteo', 'Gomez', 'Huchan', 'Fernandez', 'Gonzalez', 'Perez', 'Garcia'])
-        matrizalumnos.append (
+        diccalumnos.append (
         {
             'Legajos' : legajo,
             'Nombres' : nombre,
             'Apellidos' : apellido
         }
         )
-        cantalum -= 1
-    return matrizalumnos
+        x -= 1
+    return diccalumnos
 #funciona
-def crearmatriz_materias():
-    codigos_rep = [] 
-    encabezado = ['Codigo', 'Nombre Materia', 'Turno']
+
+def crearmatriz_materias(x):
+    turnos = ['Mañana', 'Tarde', 'Noche']
+    materias = ['Programacion I', 'Fundamentos de Quimica', 'Sistemas de Representacion', 'Matematica Discreta', 'Algebra', 'Arquitectura de computadores']
+
     matriz_materias = []
-    
-    for i in range(18):# 18 = len(turnos) * len(materias) => total de materias x turnos 3x6
-        
-        codigo = random.randint(1, 1324)
-        while codigo in codigos_rep:
+    codigos_rep = []
+    for i in range(x):
+        for i in range(18):# 18 = len(turnos) * len(materias) => total de materias x turnos 3x6
             codigo = random.randint(1, 1324)
-        turno = random.choice(['Mañana', 'Tarde', 'Noche'])
-        materia = random.choice(['Programacion I', 'Quimíca', 'Sistemas I', 'Matematica Discreta', 'Algebra', 'Física'])
+            while codigo in codigos_rep:
+                codigo = random.randint(1, 1324)
+            codigos_rep.append(codigo)
+        turno = random.choice(turnos)
+        materia = random.choice(materias)
+        matriz_materias.append([codigo, materia, turno])
         codigos_rep.append(codigo)
-        matriz_materias.append(
-                {
-                    'Turnos' : turno,
-                    'Materias' : materia,
-                    'Código' : codigo
-                }
-            )
     return matriz_materias
-#funciona
+
+#funciona, pero hay q ver como unificar
 def limitar(opcion, x): #opcion == lista , x == numero para limitar
     if len(opcion) > x:
         return opcion[:x]
@@ -46,10 +44,10 @@ def limitar(opcion, x): #opcion == lista , x == numero para limitar
         return(opcion) 
     # no estaria funcionando, revisar!
 
-def crearmatriz_notas(matrizalumnos):
+def creardicc_notas(x):
     matriznotas = [['Parcial 1', 'Parcial 2', 'Final']]
     matriznotas = []
-    for alumno in matrizalumnos[1:]:
+    for alumno in x[1:]:
         legajo = str(alumno['Legajos'])
     for i in range(len(legajo)):
         parcial1 = random.randint(1,10)
@@ -67,22 +65,26 @@ def crearmatriz_notas(matrizalumnos):
         )
     return matriznotas
 
-def combinado(matrizalumnos, matrizmateria, matriznotas):
+def combinado(diccalumnos, matrizmateria, matriznotas):
     matriz_combinada = []
-    for alumno, materia, nota in zip(matrizalumnos, matrizmateria, matriznotas):
-        combinado = {
-            'Legajos' : alumno['Legajos'],
-            'Nombres' : alumno['Nombres'],
-            'Apellidos' : alumno['Apellidos'],
-            'Turnos' : materia['Turnos'],
-            'Materias' : materia['Materias'],
-            'Código' : materia['Código'],
-            'Parcial 1' : nota['Parcial 1'],
-            'Parcial 2' : nota['Parcial 2'],
-            'Final' : nota['Final']
-                        
-        }
-        matriz_combinada.append(combinado)
-    return matriz_combinada
     
-#hay algo raro aca, arregle lo de los legajos multiplicados pero ahora no funca el codigo => codigo = materia[0]
+    # Agregar encabezados como primera fila (opcional)
+    matriz_combinada.append(['Legajo', 'Nombre', 'Apellido', 'Código Materia', 'Materia', 'Turno', 'Parcial 1', 'Parcial 2', 'Final'])
+
+    # Recorrer las tres listas simultáneamente
+    for alumno, materia, nota in zip(diccalumnos, matrizmateria, matriznotas):
+        fila = [
+            alumno['Legajos'],
+            alumno['Nombres'],
+            alumno['Apellidos'],
+            materia[0],  #codigo de materia
+            materia[1],  # nombre de la materia
+            materia[2],  #turno
+            nota['Parcial 1'],
+            nota['Parcial 2'],
+            nota['Final']
+        ]
+        matriz_combinada.append(fila)
+        
+    
+    return matriz_combinada

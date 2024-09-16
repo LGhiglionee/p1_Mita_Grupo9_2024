@@ -10,13 +10,31 @@ def menu():
     print('7. Actualizar nota')
     print('8. Salir')
     return
-def encabezados(x):# x == cualquier matriz, en un futuro si se unifica va ser más cómodo
-    claves = x[0].keys()
-    encabezado = " | ".join(f"{clave:<19}" for clave in claves)
-    print(encabezado)
-    for fila in x:
-        cadena = " | ".join(f"{str(fila.get(clave)):<19}" for clave in claves)
-        print(cadena)
-#errores en un futuro en diseño
-def mostrar(x):
-    encabezados(x)
+
+def tabla(x):
+    # Encuentra el ancho máximo de cada columna
+    ancho_columna = [max(len(str(item)) for item in col) for col in zip(*x)]
+    
+
+    # Imprime el encabezado
+    def encabezado():
+        encabezado = x[0]
+        print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
+        
+        print('|' + '|'.join(f' {str(item).ljust(ancho)} ' for item, ancho in zip(encabezado, ancho_columna)) + '|')
+        
+        print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
+    
+    # Imprime el contenido
+    def filas():
+        for fila in x[1:]:
+            print('|' + '|'.join(f' {str(item).ljust(ancho)} ' for item, ancho in zip(fila, ancho_columna)) + '|')
+        print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
+
+    # Ejecuta las funciones de impresión
+    encabezado()
+    filas()
+
+
+
+

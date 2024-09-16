@@ -25,8 +25,8 @@ def agregar_alumno(combinado, matrizmateria):
 
 def eliminar_alumno(a, b, c):
     legajo=int(input('Ingrese el legajo del alumno a eliminar: '))
-    for borro in range():
-        if str(a[i][0])==str(legajo):
+    for borro in range(a):
+        if str(a[borro][0])==str(legajo):
             a.pop(borro)
             print('Alumno eliminado correctamente.')
             return
@@ -34,23 +34,23 @@ def eliminar_alumno(a, b, c):
     return
 
 
-def leer_alumno(matrizalumnos):
+def leer_alumno(x):
     legajo=int(input('Ingrese el legajo del alumno que desea buscar: '))
-    for alumno in matrizalumnos:
+    for alumno in x:
         if alumno[0]==legajo:
             print(f'El alumno {alumno} ha sido encontrado.')
             return
     print('No se ha encontrado el alumno con el legajo ingresado')
 
 
-def actualizar_alumno(matrizalumnos):
+def actualizar_alumno(x):
     legajo=int(input('Ingrese el legajo del alumno a actualizar: '))
-    for i in range(1,len(matrizalumnos)):
-        if str(matrizalumnos[i][0])== str(legajo):
+    for i in range(1,len(x)):
+        if str(x[i][0])== str(legajo):
             nuevo_nombre=input('Ingrese el nuevo nombre: ')
             nuevo_apellido=input('Ingrese el nuevo apellido: ')
-            matrizalumnos[i][1]=nuevo_nombre
-            matrizalumnos[i][2]=nuevo_apellido
+            x[i][1]=nuevo_nombre
+            x[i][2]=nuevo_apellido
             print('Datos actualizados.')
             return
     print('No se ha encontrado el alumno a actualizar')

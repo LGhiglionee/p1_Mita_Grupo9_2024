@@ -17,6 +17,7 @@ def registro(usuario):#registro de usuarios
             flag = 1    
     return usuario
 
+#!!!!!!!! meter verificación mail !!!!!!!!!!
 
 def inicio (usuario):#verificacion de usuario
     nombre_usuario= input('Ingrese tu nombre de usuario: ')
