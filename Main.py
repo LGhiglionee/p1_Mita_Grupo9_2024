@@ -1,8 +1,5 @@
-from random import *
-from Crud import * 
-from Diseno import *
-from Matrices import *
-from Login import *
+import random
+from Paquetes import *
 
 cantalum = random.randint(0,30 )
 def main():
