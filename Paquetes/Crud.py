@@ -1,37 +1,51 @@
 import random
-def agregar_alumno(combinado, matrizmateria):
+def agregar_alumno(dicc_alumnos, combinado, matrizmateria):
     legajo = int(input('Ingrese el legajo: '))
+    if any(alumno['Legajos']== legajo for alumno in dicc_alumnos):
+        print('Este legajo ya existe')
     nombre = input('Ingrese el nombre: ')
     apellido = input('Ingrese el apellido: ')
+    #Creacion de nuevo alumno en diccionario alumnos
+    nuevo_alumno= {
+        'Legajos': legajo,
+        'Nombres': nombre,
+        'Apellidos' : apellido,
+    }
     
     # Seleccionar una materia aleatoria
     materia = random.choice(matrizmateria)
     
-    # Crear nuevo alumno con datos de materia y notas iniciales
-    nuevo_alumno = {
-        'Legajos': legajo,
-        'Nombres': nombre,
-        'Apellidos': apellido,
-        'Turnos': materia['Turnos'],
-        'Materias': materia['Materias'],
-        'Código': materia['Código'],
-        'Parcial 1': '-',
-        'Parcial 2': '-',
-        'Final': '-'
+    # Crear nuevo alumno con datos de materia y notas iniciales en combinados
+    nueva_entrada = {
+        legajo,
+        nombre,
+        apellido,
+        materia[0],  # Código de materia
+        materia[1],  # Nombre de la materia
+        materia[2],  # Turno
+        '-',  # Parcial 1
+        '-',  # Parcial 2
+        '-'   # Final
     }
-    
-    combinado.append(nuevo_alumno)
-    return combinado
+    dicc_alumnos.append (nuevo_alumno)
+    combinado.append(nueva_entrada)
 
-def eliminar_alumno(a, b, c):
+    print(f'Nuevo alumno con legajo {legajo} fue agregado.')
+    return dicc_alumnos, combinado
+
+def eliminar_alumno(dicc_alumnos, combinados):
     legajo=int(input('Ingrese el legajo del alumno a eliminar: '))
-    for borro in range(a):
-        if str(a[borro][0])==str(legajo):
-            a.pop(borro)
+    for alumno in dicc_alumnos:
+        if alumno['Legajos'] == legajo:
+            dicc_alumnos.remove(alumno)
             print('Alumno eliminado correctamente.')
-            return
-    print('Alumno no encontrado') #CHEQUEAR PORQUE NO FUNCIONA
-    return
+            break
+    else:
+        print('Alumno no encontrado')
+        return dicc_alumnos, combinados
+    combinados = [fila for fila in combinados if fila[0]!= legajo]
+    print('Alumno eliminado correctamente del diccionario')
+    return dicc_alumnos, combinados
 
 
 def leer_alumno(x):

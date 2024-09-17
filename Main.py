@@ -20,24 +20,22 @@ def main():
             
         elif opcionlog == 2:
             if inicio(usuario) == 1:
-                
                 opcion = 0
                 dicc_alumnos = diccio_alumnos(numAlumnos)
                 matrizmaterias = crearmatriz_materias(numAlumnos)
                 dicc_notas = creardicc_notas(dicc_alumnos)    
                 combinados = combinado(dicc_alumnos, matrizmaterias, dicc_notas)
-                tabla(combinados)
-                while opcion != 8:
+                while opcion != 9:
                     menu()
                     opcion = int(input('Ingrese la acción que desee, indicando su número: '))
                     if opcion == 1:
-                        combinados = agregar_alumno(combinados, matrizmaterias)
+                        dicc_alumnos, combinados = agregar_alumno(dicc_alumnos,combinados, matrizmaterias)
                     elif opcion == 2:
                         leer_alumno(dicc_alumnos)
                     elif opcion == 3:
                         actualizar_alumno(dicc_alumnos)
                     elif opcion == 4:
-                        eliminar_alumno(dicc_alumnos)
+                        dicc_alumnos, combinados =eliminar_alumno(dicc_alumnos, combinados)
                     elif opcion == 5:
                         leer_nota(dicc_notas)
                     elif opcion == 6:
@@ -45,11 +43,11 @@ def main():
                     elif opcion == 7:
                         actualizar_nota(dicc_notas)
                     elif opcion == 8:
-                        print('Saliendo...')
+                         tabla(combinados)
                     elif opcion == 9:
-                        pass #arreglar mostrar
+                        print('Saliendo...')
                     else:
-                        print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 5.')
+                        print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 9.')
         
         elif opcionlog == 3:
             print('Saliendo....')
