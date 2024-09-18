@@ -145,7 +145,7 @@ def leer_nota(combinados):
             print(f"Legajo: {fila[0]}")
             print(f"Nombre: {fila[1]} {fila[2]}")
             print(f"Materia: {fila[4]}")
-            print(f"Parcial 1: {fila[6]}")
+            print(f"Parcial 1: {fila[6]}")# estan todos en {} porque alumnos y notas son diccionarios
             print(f"Parcial 2: {fila[7]}")
             print(f"Final: {fila[8]}")
             return
