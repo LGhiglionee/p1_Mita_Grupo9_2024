@@ -24,7 +24,7 @@ def main():
                 matrizmaterias = crearmatriz_materias(numAlumnos)
                 dicc_notas = creardicc_notas(dicc_alumnos)    
                 combinados = combinado(dicc_alumnos, matrizmaterias, dicc_notas)
-                while opcion != 9:
+                while opcion != 10:
                     menu()
                     opcion = int(input('Ingrese la acción que desee, indicando su número: '))
                     if opcion == 1:
@@ -38,20 +38,20 @@ def main():
                     elif opcion == 5:
                         leer_nota(combinados)
                     elif opcion == 6:
-                        combinados = agregar_nota(dicc_notas)
+                        combinados = agregar_nota(combinados)
                     elif opcion == 7:
-                        actualizar_nota(dicc_notas)
+                        combinados=actualizar_nota(combinados)
                     elif opcion == 8:
                          tabla(combinados)
                     elif opcion == 9:
+                        mostrar_materias(matrizmaterias)
+                    elif opcion == 10:
                         print('Saliendo...')
                     else:
                         print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 9.')
-        
         elif opcionlog == 3:
             print('Saliendo....')
             break
-        
         else:
             print()
             print('Ingreso un valor que no corresponde, repita el proceso')
