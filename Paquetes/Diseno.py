@@ -8,7 +8,8 @@ def menu():
     print('5. Ver notas')
     print('6. Agregar nota')
     print('7. Actualizar nota')
-    print('8. Salir')
+    print('8. Mostrar tabla')
+    print('9. Salir')
     return
 
 def tabla(x):
