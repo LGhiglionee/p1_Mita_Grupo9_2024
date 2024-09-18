@@ -1,8 +1,20 @@
 import random
-def agregar_alumno(dicc_alumnos, combinado, matrizmateria):
-    legajo = int(input('Ingrese el legajo: '))
-    if any(alumno['Legajos']== legajo for alumno in dicc_alumnos):
-        print('Este legajo ya existe')
+def agregar_alumno(dicc_alumnos, combinados, matrizmateria):
+    while True:
+        cad = input('Ingrese el legajo: ')
+        if not cad.isdigit(): #Verifica que lo ingresado sea un numero
+            print('El legajo debe ser un numero.')
+            continue
+        legajo= str(cad).zfill(9)
+        legajo= int(legajo)
+        if any(alumno['Legajos']== legajo for alumno in dicc_alumnos):
+            print('Este legajo ya existe')
+            continue
+        break
+
+    # Seleccionar una materia aleatoria
+    materia = random.choice(matrizmateria)
+
     nombre = input('Ingrese el nombre: ')
     apellido = input('Ingrese el apellido: ')
     #Creacion de nuevo alumno en diccionario alumnos
@@ -11,10 +23,7 @@ def agregar_alumno(dicc_alumnos, combinado, matrizmateria):
         'Nombres': nombre,
         'Apellidos' : apellido,
     }
-    
-    # Seleccionar una materia aleatoria
-    materia = random.choice(matrizmateria)
-    
+        
     # Crear nuevo alumno con datos de materia y notas iniciales en combinados
     nueva_entrada = {
         legajo,
@@ -27,11 +36,11 @@ def agregar_alumno(dicc_alumnos, combinado, matrizmateria):
         '-',  # Parcial 2
         '-'   # Final
     }
-    dicc_alumnos.append (nuevo_alumno)
-    combinado.append(nueva_entrada)
+    dicc_alumnos.append(nuevo_alumno)
+    combinados.append(nueva_entrada)
 
     print(f'Nuevo alumno con legajo {legajo} fue agregado.')
-    return dicc_alumnos, combinado
+    return dicc_alumnos, combinados
 
 def eliminar_alumno(dicc_alumnos, combinados):
     legajo=int(input('Ingrese el legajo del alumno a eliminar: '))
@@ -48,67 +57,101 @@ def eliminar_alumno(dicc_alumnos, combinados):
     return dicc_alumnos, combinados
 
 
-def leer_alumno(x):
-    legajo=int(input('Ingrese el legajo del alumno que desea buscar: '))
-    for alumno in x:
-        if alumno[0]==legajo:
-            print(f'El alumno {alumno} ha sido encontrado.')
+def leer_alumno(dicc_alumnos):
+    legajo = input('Ingrese el legajo del alumno que desea buscar: ')
+    for alumno in dicc_alumnos:
+        if str(alumno['Legajos']) == legajo:
+            print(f"Legajo: {alumno['Legajos']}")
+            print(f"Nombre: {alumno['Nombres']}")
+            print(f"Apellido: {alumno['Apellidos']}")
             return
     print('No se ha encontrado el alumno con el legajo ingresado')
 
 
-def actualizar_alumno(x):
-    legajo=int(input('Ingrese el legajo del alumno a actualizar: '))
-    for i in range(1,len(x)):
-        if str(x[i][0])== str(legajo):
-            nuevo_nombre=input('Ingrese el nuevo nombre: ')
-            nuevo_apellido=input('Ingrese el nuevo apellido: ')
-            x[i][1]=nuevo_nombre
-            x[i][2]=nuevo_apellido
+def actualizar_alumno(dicc_alumnos, combinados):
+    legajo = input('Ingrese el legajo del alumno a actualizar: ')
+    for alumno in dicc_alumnos:
+        if str(alumno['Legajos']) == legajo:
+            nuevo_nombre = input('Ingrese el nuevo nombre: ')
+            nuevo_apellido = input('Ingrese el nuevo apellido: ')
+            if nuevo_nombre:
+                alumno['Nombres'] = nuevo_nombre
+            if nuevo_apellido:
+                alumno['Apellidos'] = nuevo_apellido
+            
+            # Actualizar también en combinados
+            for fila in combinados:
+                if str(fila[0]) == legajo:
+                    if nuevo_nombre:
+                        fila[1] = nuevo_nombre
+                    if nuevo_apellido:
+                        fila[2] = nuevo_apellido
+                    break
+            
             print('Datos actualizados.')
-            return
+            return dicc_alumnos, combinados
     print('No se ha encontrado el alumno a actualizar')
+    return dicc_alumnos, combinados
+
+def agregar_nota(dicc_notas):
+    legajo = input('Ingrese el número de legajo del alumno a calificar: ')
+    
+    # Buscar el alumno en dicc_notas
+    for notas in dicc_notas:
+        if str(notas['Legajo']) == legajo:
+            
+            # Ingreso y validación de la nota del parcial 1
+            parcial1 = input('Ingrese la nota del parcial 1 (1-10 o "-" para no cambiar): ')
+            if parcial1 != '-':
+                if parcial1.isdigit() and 1 <= int(parcial1) <= 10:
+                    notas['Parcial 1'] = int(parcial1)
+                else:
+                    print('Nota errónea. Debe ser un número entre 1 y 10.')
+                    return dicc_notas
+
+            # Ingreso y validación de la nota del parcial 2
+            parcial2 = input('Ingrese la nota del parcial 2 (1-10 o "-" para no cambiar): ')
+            if parcial2 != '-':
+                if parcial2.isdigit() and 1 <= int(parcial2) <= 10:
+                    notas['Parcial 2'] = int(parcial2)
+                else:
+                    print('Nota errónea. Debe ser un número entre 1 y 10.')
+                    return dicc_notas
+
+            # Validar si el alumno promociona o necesita nota de final
+            if notas['Parcial 1'] >= 8 and notas['Parcial 2'] >= 8:
+                notas['Final'] = 'Promoción'
+            elif notas['Parcial 1'] <4 and notas['Parcial 2']<4:
+                notas['Final'] = 'Recursa'
+            else:
+                final = input('Ingrese la nota del examen final (1-10 o "-" para no cambiar): ')
+                if final != '-':
+                    if final.isdigit() and 1 <= int(final) <= 10:
+                        notas['Final'] = int(final)
+                    else:
+                        print('Nota inválida. Debe ser un número entre 1 y 10.')
+                        return dicc_notas
+
+            print('Las notas han sido cargadas correctamente.')
+            return dicc_notas
+    
+    # Si no encuentra el legajo, da un mensaje de error
+    print('No se ha encontrado el alumno con el legajo ingresado')
+    return dicc_notas
 
 
-
-def agregar_nota(matriznotas):
-    legajo = int(input('Ingrese el número de legajo del alumno a calificar: '))
-    codigo = int(input('Ingrese el código de la materia: '))
-    parcial1 = int(input('Ingrese la nota del parcial 1: '))
-
-    if parcial1 >= 1 and parcial1 <= 10:
-        parcial2_input = input('Ingrese la nota del parcial 2 (o presione Enter para dejar en blanco): ')
-        if parcial2_input.strip() == '':
-            parcial2 = '-'
-        else:
-            parcial2 = int(parcial2_input)
-            if parcial2 < 1 or parcial2 > 10:
-                print('La nota del parcial 2 debe estar entre 1 y 10.')
-                return
-
-        if parcial1 >= 8 and parcial2 >= 8:
-            final = 'Eximido'
-            print('El alumno se ha eximido del examen final.')
-        else:
-            final = int(input('Ingrese la nota del examen final: '))
-            if final < 1 or final > 10:
-                print('La nota del examen final debe estar entre 1 y 10.')
-                return
-
-        matriznotas.append([legajo, codigo, parcial1, parcial2, final])
-        print('Las notas han sido cargadas.')
-    else:
-        print('La nota del parcial 1 debe estar entre 1 y 10.')
-
-def leer_nota(matriznotas):
+def leer_nota(combinados):
     legajo = input('Ingrese el número de legajo del estudiante: ')
-    notas_alumno = list(filter(lambda x: x[0] == legajo, matriznotas[1:]))
-    if notas_alumno:
-        for nota in notas_alumno:
-            print(nota)
-    else:
-        print('No se ha encontrado el alumno con el legajo ingresado')
-        return
+    for fila in combinados:
+        if str(fila[0]) == legajo:
+            print(f"Legajo: {fila[0]}")
+            print(f"Nombre: {fila[1]} {fila[2]}")
+            print(f"Materia: {fila[4]}")
+            print(f"Parcial 1: {fila[6]}")
+            print(f"Parcial 2: {fila[7]}")
+            print(f"Final: {fila[8]}")
+            return
+    print('No se ha encontrado el alumno con el legajo ingresado')
 
 def actualizar_nota(matriznotas):
     legajo = int(input('Ingrese el legajo del alumno para actualizar su nota: '))
