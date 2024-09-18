@@ -36,7 +36,7 @@ def main():
                     elif opcion == 4:
                         dicc_alumnos, combinados =eliminar_alumno(dicc_alumnos, combinados)
                     elif opcion == 5:
-                        leer_nota(dicc_notas)
+                        leer_nota(combinados)
                     elif opcion == 6:
                         combinados = agregar_nota(dicc_notas)
                     elif opcion == 7:
