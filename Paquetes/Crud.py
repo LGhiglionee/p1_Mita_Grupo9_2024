@@ -23,9 +23,9 @@ def agregar_alumno(dicc_alumnos, combinados, matrizmateria):
         legajo,
         nombre,
         apellido,
-        materia[0],  # código materia
-        materia[1],  # nombre materia
-        materia[2],  # turno
+        materia[0], # código materia
+        materia[1], # nombre materia
+        materia[2], # turno
         '-',  # parcial 01
         '-',  # parcial 02
         '-'   # final
