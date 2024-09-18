@@ -3,7 +3,9 @@ import re
 def validar_mail(mail):
     # Patrón para validar un correo electrónico
     patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-    return re.match(patron, mail) is not None
+    value= re.match(patron, mail)
+    if value != None:
+        return value 
 
 def registro(usuario):#registro de usuarios
     flag = 0
