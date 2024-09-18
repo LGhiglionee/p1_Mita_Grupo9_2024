@@ -39,14 +39,6 @@ def crearmatriz_materias(x):
         codigos_rep.append(codigo)
     return matriz_materias
 
-#funciona, pero hay q ver como unificar
-def limitar(opcion, x): #opcion == lista , x == numero para limitar
-    if len(opcion) > x:
-        return opcion[:x]
-    else:
-        return(opcion) 
-    # no estaria funcionando, revisar!
-
 def creardicc_notas(x):
     matriznotas = [['Parcial 1', 'Parcial 2', 'Final']]
     matriznotas = []
@@ -73,10 +65,9 @@ def creardicc_notas(x):
 def combinado(diccalumnos, matrizmateria, matriznotas):
     matriz_combinada = []
     
-    # Agregar encabezados como primera fila (opcional)
+
     matriz_combinada.append(['Legajo', 'Nombre', 'Apellido', 'Código Materia', 'Materia', 'Turno', 'Parcial 1', 'Parcial 2', 'Final'])
 
-    # Recorrer las tres listas simultáneamente
     for alumno, materia, nota in zip(diccalumnos, matrizmateria, matriznotas):
         fila = [
             alumno['Legajos'],
