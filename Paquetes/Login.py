@@ -14,7 +14,7 @@ def registro(usuario):#registro de usuarios
 
         if not validar_mail(mail):
             print('Correo invalido')
-            continue
+            
         
         if nombre_usuario in usuario:# verifica en caso de repeticion de usuarios
             if usuario[nombre_usuario]['contrasena'] == contrasena:

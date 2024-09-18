@@ -1,13 +1,13 @@
 import random
 
 def agregar_alumno(dicc_alumnos, combinados, matrizmateria):
-    while True:
+    flag = 1
+    while flag == 1:
         cad = input('Ingrese el legajo: ')
         if not cad.isdigit():
             print('El legajo debe ser un número.')
-            continue
         legajo = str(cad.zfill(9)) #llena de 0 el legajo
-        break
+        flag = 0
 
     materia = random.choice(matrizmateria)
     nombre = input('Ingrese el nombre: ').title()
@@ -38,19 +38,20 @@ def agregar_alumno(dicc_alumnos, combinados, matrizmateria):
     return dicc_alumnos, combinados
 
 def eliminar_alumno(dicc_alumnos, combinados):
-
-    legajo=int(input('Ingrese el legajo del alumno a eliminar: '))
-    for alumno in dicc_alumnos:
-        if alumno['Legajos'] == legajo:
-            dicc_alumnos.remove(alumno) 
-            print('Alumno eliminado correctamente.')
-            break
-    else:
-        print('Alumno no encontrado')
-        return dicc_alumnos, combinados
-    combinados = [fila for fila in combinados if fila[0]!= legajo] #borra al legajo puesto, y se queda con los otros
-    print('Alumno eliminado correctamente del diccionario')
-    return dicc_alumnos, combinados
+    flag = 1
+    while flag == 1:
+        legajo=int(input('Ingrese el legajo del alumno a eliminar: '))
+        for alumno in dicc_alumnos:
+            if alumno['Legajos'] == legajo:
+                dicc_alumnos.remove(alumno) 
+                print('Alumno eliminado correctamente.')
+                flag = 0
+        else:
+            print('Alumno no encontrado')
+            print('Alumno eliminado correctamente del diccionario')
+            flag = 0
+            return dicc_alumnos, combinados
+            #borra al legajo puesto, y se queda con los otros
 
 
 def leer_alumno(dicc_alumnos):
@@ -76,15 +77,16 @@ def actualizar_alumno(dicc_alumnos, combinados):
                 alumno['Nombres'] = nuevo_nombre
             if nuevo_apellido:
                 alumno['Apellidos'] = nuevo_apellido
-            
+            flag = 1
             #actualizar también en combinados
-            for fila in combinados:
-                if str(fila[0]) == legajo:
-                    if nuevo_nombre:
-                        fila[1] = nuevo_nombre
-                    if nuevo_apellido:
-                        fila[2] = nuevo_apellido
-                    break
+            while flag == 1:
+                for fila in combinados:
+                    if str(fila[0]) == legajo:
+                        if nuevo_nombre:
+                            fila[1] = nuevo_nombre
+                        if nuevo_apellido:
+                            fila[2] = nuevo_apellido
+                        flag = 0
             print('Datos actualizados.')
             return dicc_alumnos, combinados
     print('No se ha encontrado el alumno a actualizar')

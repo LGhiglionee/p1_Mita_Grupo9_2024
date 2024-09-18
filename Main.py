@@ -8,7 +8,7 @@ def main():
             'mail' : 'root@gmail.com'
                 }
         }
-    while True:
+    while opcionlog != 3:
         numAlumnos = random.randint(0,30)
         print('1. No tienes usuario? Registrate')
         print('2. Iniciar Sesion')
@@ -89,7 +89,6 @@ def main():
                     
         elif opcionlog == 3:
             print('Saliendo....')
-            break
         else:
             print()
             print('Ingreso un valor que no corresponde, repita el proceso')

@@ -1,5 +1,3 @@
-from .Matrices import *
-
 def menuT():
     print('1. Alumnos')
     print('2. Materias')
