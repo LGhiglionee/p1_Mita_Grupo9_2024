@@ -51,7 +51,7 @@ def main():
                             print()
                             aux = 0
                             aux = int(input('Ingrese la acción que desee, indicando su número: '))
-                            if aux != 5:
+                            if aux != 4:
                                 if aux == 1:
                                     matrizmaterias = agregar_materia(matrizmaterias)
                                 elif aux == 2:
@@ -67,7 +67,7 @@ def main():
                         print()
                         aux = 0
                         aux = int(input('Ingrese la acción que desee, indicando su número: '))
-                        if aux != 5:
+                        if aux != 4:
                             if aux == 1:
                                 leer_nota(combinados)
                             elif aux == 2:
