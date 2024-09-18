@@ -15,6 +15,9 @@ def diccio_alumnos(x):
         }
         )
         x -= 1
+        diccalumnos.sort(key = lambda x: (int(x["Legajos"])))# el x para que se ordene de manera ascendente
+        diccalumnos.reverse()# y esto lo pasa a descendente
+    
     return diccalumnos
 #funciona
 
