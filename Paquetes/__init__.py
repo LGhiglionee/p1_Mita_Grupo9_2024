@@ -14,7 +14,7 @@ __all__ = [
     'registro', 'inicio',
     
     #funciones de matrices
-    'diccio_alumnos', 'crearmatriz_materias', 'limitar', 'creardicc_notas', 'combinado',
+    'diccio_alumnos', 'crearmatriz_materias', 'creardicc_notas', 'combinado',
     
     #funciones del diseño
     'menuA', 'menuT', 'menuN' , 'menuM' , 'tabla', 'tablamatriz','agregar_materia', 'eliminar_materia',
