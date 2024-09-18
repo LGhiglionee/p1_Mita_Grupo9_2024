@@ -8,9 +8,9 @@ def validar_mail(mail):
 def registro(usuario):#registro de usuarios
     flag = 0
     while flag == 0:
-        nombre_usuario = input('ingrese su nuevo usuario: ')
-        contrasena = input('ingrese su nueva contra: ')
-        mail= input('Ingrese su correo electronico: ')
+        nombre_usuario = input('ingrese su nuevo usuario: ').strip().lower()
+        contrasena = input('ingrese su nueva contra: ').strip()
+        mail= input('Ingrese su correo electronico: ').strip().lower()
 
         if not validar_mail(mail):
             print('Correo invalido')
@@ -32,8 +32,8 @@ def registro(usuario):#registro de usuarios
 #!!!!!!!! meter verificación mail !!!!!!!!!!
 
 def inicio (usuario):#verificacion de usuario
-    ingreso = input('Ingrese su nombre de usuario o correo electrónico: ')
-    contrasena = input('Ingrese su contraseña: ')
+    ingreso = input('Ingrese su nombre de usuario o correo electrónico: ').strip().lower()
+    contrasena = input('Ingrese su contraseña: ').strip()
     if "@" in ingreso and "." in ingreso: # Si el ingreso contiene un "@" y un ".", se trata como correo electrónico
         if not validar_mail(ingreso):
             print('El correo electrónico ingresado no es válido.')
