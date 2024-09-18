@@ -29,17 +29,15 @@ def registro(usuario):#registro de usuarios
             flag = 1    
     return usuario
 
-#!!!!!!!! meter verificación mail !!!!!!!!!!
-
 def inicio (usuario):#verificacion de usuario
     ingreso = input('Ingrese su nombre de usuario o correo electrónico: ').strip().lower()
     contrasena = input('Ingrese su contraseña: ').strip()
-    if "@" in ingreso and "." in ingreso: # Si el ingreso contiene un "@" y un ".", se trata como correo electrónico
-        if not validar_mail(ingreso):
+    if "@" in ingreso and "." in ingreso: # Si el ingreso contiene un "@" y un "."
+        if not validar_mail(ingreso): #Verifica que siga el patron de mail
             print('El correo electrónico ingresado no es válido.')
             return 0
     for key, valor in usuario.items():  # Buscar el usuario por nombre de usuario o correo electrónico
-        if key == ingreso or ('mail' in valor and valor['mail'] == ingreso):  # Verificar si 'mail' existe
+        if key == ingreso or ('mail' in valor and valor['mail'] == ingreso):  # Verificar si mail existe
             if valor['contrasena'] == contrasena:
                 print('Login exitoso')
                 return 1
