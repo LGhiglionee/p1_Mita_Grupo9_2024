@@ -1,13 +1,12 @@
 import random
 
 def agregar_alumno(dicc_alumnos, combinados, matrizmateria):
-    """Agrega un nuevo alumno al sistema con legajo, nombre y materia aleatoria."""
     while True:
         cad = input('Ingrese el legajo: ')
         if not cad.isdigit():
             print('El legajo debe ser un número.')
             continue
-        legajo = str(cad.zfill(9)) #Llena de 0 el legajo
+        legajo = str(cad.zfill(9)) #llena de 0 el legajo
         break
 
     materia = random.choice(matrizmateria)
@@ -39,7 +38,7 @@ def agregar_alumno(dicc_alumnos, combinados, matrizmateria):
     return dicc_alumnos, combinados
 
 def eliminar_alumno(dicc_alumnos, combinados):
-    """Elimina un alumno del sistema por su número de legajo."""
+
     legajo=int(input('Ingrese el legajo del alumno a eliminar: '))
     for alumno in dicc_alumnos:
         if alumno['Legajos'] == legajo:
@@ -55,7 +54,7 @@ def eliminar_alumno(dicc_alumnos, combinados):
 
 
 def leer_alumno(dicc_alumnos):
-    """Muestra la información de un alumno por su número de legajo."""
+
     legajo = input('Ingrese el legajo del alumno que desea buscar: ')
     for alumno in dicc_alumnos: 
         if str(alumno['Legajos']) == legajo: #se fija el que tenga el mismo legajo
@@ -67,7 +66,7 @@ def leer_alumno(dicc_alumnos):
 
 
 def actualizar_alumno(dicc_alumnos, combinados):
-    """Actualiza el nombre y apellido de un alumno existente."""
+
     legajo = input('Ingrese el legajo del alumno a actualizar: ')
     for alumno in dicc_alumnos:
         if str(alumno['Legajos']) == legajo:
@@ -92,7 +91,6 @@ def actualizar_alumno(dicc_alumnos, combinados):
     return dicc_alumnos, combinados
 
 def agregar_nota(combinados):
-    """Agrega o actualiza las notas de un alumno para una materia específica."""
     
     legajo = input('Ingrese el número de legajo del alumno a calificar: ')
     
