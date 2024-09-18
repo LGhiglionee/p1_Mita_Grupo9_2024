@@ -9,7 +9,8 @@ def menu():
     print('6. Agregar nota')
     print('7. Actualizar nota')
     print('8. Mostrar tabla')
-    print('9. Salir')
+    print('9. Mostrar materias')
+    print('10. Salir')
     return
 
 def tabla(x):
@@ -36,6 +37,8 @@ def tabla(x):
     encabezado()
     filas()
 
-
+def mostrar_materias(matrizmaterias):
+    for fila in matrizmaterias:
+        print(fila)
 
 
