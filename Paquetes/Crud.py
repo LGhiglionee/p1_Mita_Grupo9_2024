@@ -20,20 +20,20 @@ def agregar_alumno(dicc_alumnos, combinados, matrizmateria):
         'Apellidos': apellido,
     }
 
-    nueva_entrada = [
+    nueva_ingreso = [
         legajo,
         nombre,
         apellido,
-        materia[0],  # Código de materia
-        materia[1],  # Nombre de la materia
-        materia[2],  # Turno
-        '-',  # Parcial 1
-        '-',  # Parcial 2
-        '-'   # Final
+        materia[0],  # código materia
+        materia[1],  # nombre materia
+        materia[2],  # turno
+        '-',  # parcial 01
+        '-',  # parcial 02
+        '-'   # final
     ]
 
     dicc_alumnos.append(nuevo_alumno)
-    combinados.append(nueva_entrada)
+    combinados.append(nueva_ingreso)
 
     print(f'Nuevo alumno con legajo {legajo} fue agregado.')
     return dicc_alumnos, combinados
@@ -43,13 +43,13 @@ def eliminar_alumno(dicc_alumnos, combinados):
     legajo=int(input('Ingrese el legajo del alumno a eliminar: '))
     for alumno in dicc_alumnos:
         if alumno['Legajos'] == legajo:
-            dicc_alumnos.remove(alumno) #Elimina
+            dicc_alumnos.remove(alumno) 
             print('Alumno eliminado correctamente.')
             break
     else:
         print('Alumno no encontrado')
         return dicc_alumnos, combinados
-    combinados = [fila for fila in combinados if fila[0]!= legajo] #Descarta al legajo puesto, y se queda con los otros
+    combinados = [fila for fila in combinados if fila[0]!= legajo] #borra al legajo puesto, y se queda con los otros
     print('Alumno eliminado correctamente del diccionario')
     return dicc_alumnos, combinados
 
@@ -57,8 +57,8 @@ def eliminar_alumno(dicc_alumnos, combinados):
 def leer_alumno(dicc_alumnos):
     """Muestra la información de un alumno por su número de legajo."""
     legajo = input('Ingrese el legajo del alumno que desea buscar: ')
-    for alumno in dicc_alumnos: #Recorre
-        if str(alumno['Legajos']) == legajo: #Se fija el que tenga el mismo legajo
+    for alumno in dicc_alumnos: 
+        if str(alumno['Legajos']) == legajo: #se fija el que tenga el mismo legajo
             print(f"Legajo: {alumno['Legajos']}")
             print(f"Nombre: {alumno['Nombres']}")
             print(f"Apellido: {alumno['Apellidos']}")
@@ -78,7 +78,7 @@ def actualizar_alumno(dicc_alumnos, combinados):
             if nuevo_apellido:
                 alumno['Apellidos'] = nuevo_apellido
             
-            # Actualizar también en combinados
+            #actualizar también en combinados
             for fila in combinados:
                 if str(fila[0]) == legajo:
                     if nuevo_nombre:
@@ -96,7 +96,7 @@ def agregar_nota(combinados):
     
     legajo = input('Ingrese el número de legajo del alumno a calificar: ')
     
-    for alumno in combinados[1:]:  # Empezamos desde el índice 1 para saltar el encabezado
+    for alumno in combinados[1:]:  #emmpieza  desde el índice 1 para saltar el encabezado
         if str(alumno[0]) == legajo: 
             print(f"Alumno: {alumno[1]} {alumno[2]}")
             print(f"Materia: {alumno[4]}")
@@ -117,7 +117,7 @@ def agregar_nota(combinados):
                     print('Nota errónea. Debe ser un número entre 1 y 10.')
                     return combinados
 
-            # Convertimos a enteros para la comparación, si no son '-'
+            # convierte a enteros para la comparación, si no son '-'
             parcialuno= int(alumno[6]) if alumno[6] != '-' else 0
             parcialdos = int(alumno[7]) if alumno[7] != '-' else 0
 
@@ -143,7 +143,7 @@ def agregar_nota(combinados):
 def leer_nota(combinados):
     legajo = input('Ingrese el número de legajo del estudiante: ').strip()
     for fila in combinados:
-        if str(fila[0]) == legajo: #Busca el legajo, e imprime toda su informacion
+        if str(fila[0]) == legajo: #busca el legajo, e imprime toda su informacion
             print(f"Legajo: {fila[0]}")
             print(f"Nombre: {fila[1]} {fila[2]}")
             print(f"Materia: {fila[4]}")
@@ -197,3 +197,23 @@ def actualizar_nota(combinados):
 
     print("El legajo no existe")
     return combinados
+
+def agregar_materia(matrizmaterias):
+    codigo= int(input('Ingrese el codigo de la materia: '))
+    nombre = input('Ingrese el nombre de la materia: ').capitalize().strip()
+    turno = input('Ingrese el turno en el que se dicta: ').capitalize().strip()
+    nuevasmat = [codigo,nombre,turno]
+
+    matrizmaterias.append(nuevasmat)
+    return matrizmaterias
+
+def eliminar_materia(matrizmaterias):
+    codigo = int(input('Ingrese el codigo de la materia a eliminar: '))
+    for materia in matrizmaterias:
+        if materia[0] == codigo:
+
+            matrizmaterias.remove(materia)
+            
+            print(f'La materia con codigo {codigo} ha sido eliminada')
+            return matrizmaterias
+    print('No se encontro ninguna materia con dicho codigo')
