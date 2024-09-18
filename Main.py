@@ -24,35 +24,68 @@ def main():
                 matrizmaterias = crearmatriz_materias(numAlumnos)
                 dicc_notas = creardicc_notas(dicc_alumnos)    
                 combinados = combinado(dicc_alumnos, matrizmaterias, dicc_notas)
-                while opcion != 12:
-                    menu()
+                while opcion != 5:
+                    menuT()
+                    print()
                     opcion = int(input('Ingrese la acción que desee, indicando su número: '))
                     if opcion == 1:
-                        dicc_alumnos, combinados = agregar_alumno(dicc_alumnos,combinados, matrizmaterias)
+                        menuA()
+                        print()
+                        aux = 0
+                        aux = int(input('Ingrese la acción que desee, indicando su número: '))
+                        if aux != 5:
+                            if aux == 1:
+                                dicc_alumnos, combinados = agregar_alumno(dicc_alumnos, combinados, matrizmaterias)
+                            elif aux == 2:
+                                leer_alumno(dicc_alumnos)
+                            elif aux == 3:
+                                dicc_alumnos, combinados = actualizar_alumno(dicc_alumnos, combinados)
+                            elif aux == 4:
+                                dicc_alumnos, combinados = eliminar_alumno(dicc_alumnos, combinados)
+                            elif aux == 5:
+                                print('Saliendo...')
+                            else:
+                                print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 5')
                     elif opcion == 2:
-                        leer_alumno(dicc_alumnos)
+                            menuM()
+                            print()
+                            aux = 0
+                            aux = int(input('Ingrese la acción que desee, indicando su número: '))
+                            if aux != 5:
+                                if aux == 1:
+                                    matrizmaterias = agregar_materia(matrizmaterias)
+                                elif aux == 2:
+                                    matrizmaterias = eliminar_materia(matrizmaterias)
+                                elif aux == 3:
+                                    tablamatriz(matrizmaterias)
+                                elif aux == 4:
+                                    print('Saliendo...')
+                                else:
+                                    print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 4')
                     elif opcion == 3:
-                        dicc_alumnos, combinados = actualizar_alumno(dicc_alumnos, combinados)
+                        menuN()
+                        print()
+                        aux = 0
+                        aux = int(input('Ingrese la acción que desee, indicando su número: '))
+                        if aux != 5:
+                            if aux == 1:
+                                leer_nota(combinados)
+                            elif aux == 2:
+                                combinados = agregar_nota(combinados)
+                            elif aux == 3:
+                                combinados = actualizar_nota(combinados)
+                            elif aux == 4:
+                                print('Saliendo...')
+                            else:
+                                print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 4')
+                            
                     elif opcion == 4:
-                        dicc_alumnos, combinados =eliminar_alumno(dicc_alumnos, combinados)
+                        tabla(combinados)
                     elif opcion == 5:
-                        leer_nota(combinados)
-                    elif opcion == 6:
-                        combinados = agregar_nota(combinados)
-                    elif opcion == 7:
-                        combinados=actualizar_nota(combinados)
-                    elif opcion == 8:
-                         tabla(combinados)
-                    elif opcion == 9:
-                        tablamatriz(matrizmaterias)
-                    elif opcion == 10:
-                        matrizmaterias = agregar_materia(matrizmaterias)
-                    elif opcion == 11:
-                        matrizmaterias = eliminar_materia(matrizmaterias)
-                    elif opcion == 12:
                         print('Saliendo...')
                     else:
-                        print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 9.')
+                        print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 4.')
+                    
         elif opcionlog == 3:
             print('Saliendo....')
             break
