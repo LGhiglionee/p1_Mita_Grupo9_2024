@@ -141,9 +141,9 @@ def agregar_nota(dicc_notas):
 
 
 def leer_nota(combinados):
-    legajo = input('Ingrese el número de legajo del estudiante: ')
+    legajo = input('Ingrese el número de legajo del estudiante: ').strip()
     for fila in combinados:
-        if str(fila[0]) == legajo:
+        if str(fila[0]) == legajo: #Busca el legajo, e imprime toda su informacion
             print(f"Legajo: {fila[0]}")
             print(f"Nombre: {fila[1]} {fila[2]}")
             print(f"Materia: {fila[4]}")
