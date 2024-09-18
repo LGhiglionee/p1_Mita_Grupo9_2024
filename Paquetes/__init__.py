@@ -18,7 +18,7 @@ __all__ = [
     'diccio_alumnos', 'crearmatriz_materias', 'limitar', 'creardicc_notas', 'combinado',
     
     #funciones del diseño
-    'menu', 'tabla', 'tablamatriz',
+    'menuA', 'menuT', 'menuN' , 'menuM' , 'tabla', 'tablamatriz',
 
     #Funciones Crud materias
     'agregar_materia', 'eliminar_materia',
