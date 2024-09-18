@@ -80,6 +80,7 @@ def main():
                                 print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 4')
                             
                     elif opcion == 4:
+                        combinados = combinado(dicc_alumnos, matrizmaterias, dicc_notas)
                         tabla(combinados)
                     elif opcion == 5:
                         print('Saliendo...')
