@@ -49,22 +49,22 @@ def creardicc_notas(x):
     matriznotas = []
     for alumno in x[1:]:
         legajo = str(alumno['Legajos'])
-    for i in range(len(legajo)):
-        parcial1 = random.randint(1,10)
-        parcial2 = random.randint(1,10)
-        if parcial1 >= 8 and parcial2 >= 8:
-            final = 'Promocion'
-        elif parcial1 <4 and parcial2 <4:
-            final = 'Recursa'
-        else:
-            final = random.randint(1,10)
-        matriznotas.append(
-            {
-                'Parcial 1' : parcial1,
-                'Parcial 2' : parcial2,
-                'Final' : final
-            }
-        )
+        for i in range(len(legajo)):
+            parcial1 = random.randint(1,10)
+            parcial2 = random.randint(1,10)
+            if parcial1 >= 8 and parcial2 >= 8:
+                final = 'Promocion'
+            elif parcial1 <4 and parcial2 <4:
+                final = 'Recursa'
+            else:
+                final = random.randint(1,10)
+            matriznotas.append(
+                {
+                    'Parcial 1' : parcial1,
+                    'Parcial 2' : parcial2,
+                    'Final' : final
+                }
+            )
     return matriznotas
 
 def combinado(diccalumnos, matrizmateria, matriznotas):
