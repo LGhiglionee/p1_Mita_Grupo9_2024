@@ -3,6 +3,7 @@ from .Crud import *
 from .Login import *
 from .Matrices import *
 from .Diseno import *
+from .Crud_Materias import *
 
 # __all__ para que no tenga errores de llamada, el init lee primero todo lo que este con guiones bajos primero
 __all__ = [
@@ -17,5 +18,8 @@ __all__ = [
     'diccio_alumnos', 'crearmatriz_materias', 'limitar', 'creardicc_notas', 'combinado',
     
     #funciones del diseño
-    'menu', 'tabla'
+    'menu', 'tabla', 'tablamatriz',
+
+    #Funciones Crud materias
+    'agregar_materia', 'eliminar_materia',
 ]
