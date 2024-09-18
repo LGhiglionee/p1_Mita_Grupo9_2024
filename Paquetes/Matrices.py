@@ -53,7 +53,9 @@ def creardicc_notas(x):
         parcial1 = random.randint(1,10)
         parcial2 = random.randint(1,10)
         if parcial1 >= 8 and parcial2 >= 8:
-            final = 'Promo'
+            final = 'Promocion'
+        elif parcial1 <4 and parcial2 <4:
+            final = 'Recursa'
         else:
             final = random.randint(1,10)
         matriznotas.append(
