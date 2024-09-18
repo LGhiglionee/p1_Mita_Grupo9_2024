@@ -5,6 +5,7 @@ def main():
     usuario = {
         'root': {
             'contrasena' : 'pass',
+            'mail' : 'root@gmail.com'
                 }
         }
     while True:
@@ -15,9 +16,7 @@ def main():
         
         opcionlog = int(input('Ingrese el numero, 1-3: ' ))
         if opcionlog == 1:
-            
             registro(usuario)
-            
         elif opcionlog == 2:
             if inicio(usuario) == 1:
                 opcion = 0
@@ -33,13 +32,13 @@ def main():
                     elif opcion == 2:
                         leer_alumno(dicc_alumnos)
                     elif opcion == 3:
-                        actualizar_alumno(dicc_alumnos)
+                        dicc_alumnos, combinados = actualizar_alumno(dicc_alumnos, combinados)
                     elif opcion == 4:
                         dicc_alumnos, combinados =eliminar_alumno(dicc_alumnos, combinados)
                     elif opcion == 5:
                         leer_nota(dicc_notas)
                     elif opcion == 6:
-                        agregar_nota(dicc_notas)
+                        combinados = agregar_nota(dicc_notas)
                     elif opcion == 7:
                         actualizar_nota(dicc_notas)
                     elif opcion == 8:
