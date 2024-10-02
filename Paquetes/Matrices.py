@@ -1,6 +1,6 @@
 import re, collections, random
 
-def dicc_alumnos(x):
+def creardicc_alumnos(x):
     diccalumnos = []
     while x>=1:
         legajo = random.randint(111111111,999999999)
@@ -53,7 +53,7 @@ def creardicc_materias():
                     
     
     return dicc_final
-        
+#ahí lo cambie según el profesor    
         
 
 
@@ -83,16 +83,13 @@ def creardicc_notas(x):#matriz cambiar nombre
 
 def combinado(diccalumnos, matrizmateria, matriznotas):
     matriz_combinada = []
-    
 
     matriz_combinada.append(['Legajo', 'Código Materia', 'Materia', 'Turno', 'Parcial 1', 'Parcial 2', 'Final'])
 
     for alumno, materia, nota in zip(diccalumnos, matrizmateria, matriznotas):
         fila = [
             alumno['Legajos'],
-            materia[0],  #codigo de materia
-            materia[1],  # nombre de la materia
-            materia[2],  #turno
+            materia['Codigo'], #codigo de materia
             nota['Parcial 1'],
             nota['Parcial 2'],
             nota['Final']
