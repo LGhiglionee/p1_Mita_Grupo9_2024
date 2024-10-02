@@ -1,6 +1,6 @@
 import random
 
-def agregar_alumno(dicc_alumnos, combinados, matrizmateria):
+def agregar_alumno(dicc_alumnos, combinados, dicc_materias):
     flag = 1
     while flag == 1:
         cad = input('Ingrese el legajo: ')
@@ -9,7 +9,7 @@ def agregar_alumno(dicc_alumnos, combinados, matrizmateria):
         legajo = str(cad.zfill(9)) #llena de 0 el legajo
         flag = 0
 
-    materia = random.choice(matrizmateria)
+    
     nombre = input('Ingrese el nombre: ').title()
     apellido = input('Ingrese el apellido: ').title()
 
@@ -18,21 +18,51 @@ def agregar_alumno(dicc_alumnos, combinados, matrizmateria):
         'Nombres': nombre,
         'Apellidos': apellido,
     }
+    entrada = input('Desea asignar una nueva materia a este alumno? [y/n]').lower()
+    
+    while entrada not in ['y', 'n', 'yes', 'no']:
+        entrada = input('Recuerde ingresar las opciones que ve en pantalla [y/n]').lower()
+    if entrada == 'y':
+        aux = 1
+    
+        while aux == 1:
+            codigoI = input('Ingrese código de la nueva materia')
+            
+            for m in dicc_materias:
+                print(m['Codigo'])
+                if str(codigoI) == str(m['Codigo']):
+                    
+                    nuevo_ingreso = [
+                    legajo,
+                    nombre,
+                    apellido,
+                    codigoI, # código materia
+                    m['Materia'], # nombre materia
+                    m['Turno'], # turno
+                    '-',  # parcial 01
+                    '-',  # parcial 02
+                    '-'   # final
+                    ]
+                aux = 0
+            else:
+                print('No se encontró el código,')
 
-    nueva_ingreso = [
-        legajo,
-        nombre,
-        apellido,
-        materia[0], # código materia
-        materia[1], # nombre materia
-        materia[2], # turno
-        '-',  # parcial 01
-        '-',  # parcial 02
-        '-'   # final
-    ]
-
+        
+    elif entrada == 'n':
+        materia = ''
+        nuevo_ingreso = [
+            legajo,
+            nombre,
+            apellido,
+            materia, #' '
+            materia, # ' ' 
+            materia, # ' '
+            '-',  # parcial 01
+            '-',  # parcial 02
+            '-'   # final
+        ]
     dicc_alumnos.append(nuevo_alumno)
-    combinados.append(nueva_ingreso)
+    combinados.append(nuevo_ingreso)
 
     print(f'Nuevo alumno con legajo {legajo} fue agregado.')
     return dicc_alumnos, combinados
@@ -198,7 +228,7 @@ def actualizar_nota(combinados):
     print("El legajo no existe")
     return combinados
 
-def agregar_materia(matrizmaterias):
+def agregar_nueva_materia(matrizmaterias):
     codigo= int(input('Ingrese el codigo de la materia: '))
     nombre = input('Ingrese el nombre de la materia: ').capitalize().strip()
     turno = input('Ingrese el turno en el que se dicta: ').capitalize().strip()
@@ -217,3 +247,7 @@ def eliminar_materia(matrizmaterias):
             print(f'La materia con codigo {codigo} ha sido eliminada')
             return matrizmaterias
     print('No se encontro ninguna materia con dicho codigo')
+
+def masMaterias (x):
+    
+    pass

@@ -12,9 +12,9 @@ def registro(usuario):#registro de usuarios
         contrasena = input('ingrese su nueva contra: ').strip()
         mail= input('Ingrese su correo electronico: ').strip().lower()
 
-        if not validar_mail(mail):
+        if validar_mail(mail) == None:
             print('Correo invalido')
-            continue
+            
         
         if nombre_usuario in usuario:# verifica en caso de repeticion de usuarios
             if usuario[nombre_usuario]['contrasena'] == contrasena:
@@ -32,12 +32,12 @@ def registro(usuario):#registro de usuarios
 def inicio (usuario):#verificacion de usuario
     ingreso = input('Ingrese su nombre de usuario o correo electrónico: ').strip().lower()
     contrasena = input('Ingrese su contraseña: ').strip()
-    if "@" in ingreso and "." in ingreso: # Si el ingreso contiene un "@" y un "."
-        if not validar_mail(ingreso): #Verifica que siga el patron de mail
+    if "@" in ingreso and "." in ingreso: # si el ingreso contiene un "@" y un "."
+        if not validar_mail(ingreso): #verifica que siga el patron de mail
             print('El correo electrónico ingresado no es válido.')
             return 0
-    for key, valor in usuario.items():  # Buscar el usuario por nombre de usuario o correo electrónico
-        if key == ingreso or ('mail' in valor and valor['mail'] == ingreso):  # Verificar si mail existe
+    for key, valor in usuario.items():  # buscar el usuario por nombre de usuario o correo electrónico
+        if key == ingreso or ('mail' in valor and valor['mail'] == ingreso):  # verifica si existe
             if valor['contrasena'] == contrasena:
                 print('Login exitoso')
                 return 1

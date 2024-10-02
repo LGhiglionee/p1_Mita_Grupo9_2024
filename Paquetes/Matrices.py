@@ -87,14 +87,13 @@ def combinado(diccalumnos, matrizmateria, matriznotas):
     matriz_combinada.append(['Legajo', 'Código Materia', 'Materia', 'Turno', 'Parcial 1', 'Parcial 2', 'Final'])
 
     for alumno, materia, nota in zip(diccalumnos, matrizmateria, matriznotas):
-        fila = [
+        matriz_combinada.append (fila = [
             alumno['Legajos'],
             materia['Codigo'], #codigo de materia
             nota['Parcial 1'],
             nota['Parcial 2'],
             nota['Final']
-        ]
-        matriz_combinada.append(fila)
+        ])
         
     
     return matriz_combinada

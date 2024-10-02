@@ -14,7 +14,7 @@ def menuA():
     print('5. Salir')
     
 def menuM():  
-    print('1. Agregar materia')
+    print('1. Agregar nueva materia')
     print('2. Eliminar materia')
     print('3. Mostrar materias')
     print('4. Salir')
@@ -49,29 +49,8 @@ def tabla(x):
     
     encabezado()
     filas()
-
-def tablamatriz(x):
-    # max de cada columna
-    ancho_columna = [max(len(str(item)) for item in col) for col in zip(*x)]
-    
-
-    # muestro el encabezado
-    def encabezado():
-        encabezado = ['Codigo', 'Materia', 'Turno']
-        print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
+def tabladicc(dicc_materia):
+    codigo, turno, materia = dicc_materia
+    print(codigo, materia, turno)
         
-        print('|' + '|'.join(f' {str(item).ljust(ancho)} ' for item, ancho in zip(encabezado, ancho_columna)) + '|')
-        
-        print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
-    
-    #fila +---+
-    def filas():
-        for fila in x[1:]:
-            print('|' + '|'.join(f' {str(item).ljust(ancho)} ' for item, ancho in zip(fila, ancho_columna)) + '|')
-        print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
-
-    
-    encabezado()
-    filas()
-
-
+    pass

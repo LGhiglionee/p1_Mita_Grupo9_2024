@@ -18,5 +18,5 @@ __all__ = [
     'creardicc_alumnos', 'creardicc_materias', 'creardicc_notas', 'combinado',
     
     #funciones del diseño
-    'menuA', 'menuT', 'menuN' , 'menuM' , 'tabla', 'tablamatriz'
+    'menuA', 'menuT', 'menuN' , 'menuM' , 'tabla', 'tabladicc'
     ]

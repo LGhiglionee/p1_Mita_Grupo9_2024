@@ -10,7 +10,7 @@ def main():
         }
     opcionlog = 0
     while opcionlog != 3:
-        numAlumnos = random.randint(0,30)
+        numAlumnos = random.randint(1,30)
         print('1. No tienes usuario? Registrate')
         print('2. Iniciar Sesion')
         print('3. Salir')
@@ -59,7 +59,7 @@ def main():
                                 elif aux == 2:
                                     dicc_materias = eliminar_materia(dicc_materias)
                                 elif aux == 3:
-                                    tablamatriz(dicc_materias)
+                                    tabladicc(dicc_materias)
                                 elif aux == 4:
                                     print('Saliendo...')
                                 else:
