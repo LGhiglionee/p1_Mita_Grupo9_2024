@@ -8,14 +8,15 @@ from .Diseno import *
 __all__ = [
     #funciones de aritmetica y crud
     'agregar_alumno', 'eliminar_alumno', 'leer_alumno', 'actualizar_alumno',
-    'agregar_nota', 'leer_nota', 'actualizar_nota',
+    'agregar_nota', 'leer_nota', 'actualizar_nota','agregar_nueva_materia', 'eliminar_materia',
+
     
     #funciones de login
     'registro', 'inicio',
     
     #funciones de matrices
-    'diccio_alumnos', 'crearmatriz_materias', 'creardicc_notas', 'combinado',
+    'creardicc_alumnos', 'creardicc_materias', 'creardicc_notas', 'combinado',
     
     #funciones del diseño
-    'menuA', 'menuT', 'menuN' , 'menuM' , 'tabla', 'tablamatriz','agregar_materia', 'eliminar_materia',
-]
+    'menuA', 'menuT', 'menuN' , 'menuM' , 'tabla', 'tablamatriz'
+    ]
