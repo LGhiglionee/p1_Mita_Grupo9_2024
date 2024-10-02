@@ -8,6 +8,7 @@ def main():
             'mail' : 'root@gmail.com'
                 }
         }
+    opcionlog = 0
     while opcionlog != 3:
         numAlumnos = random.randint(0,30)
         print('1. No tienes usuario? Registrate')
@@ -15,15 +16,16 @@ def main():
         print('3. Salir')
         
         opcionlog = int(input('Ingrese el numero, 1-3: ' ))
+        
         if opcionlog == 1:
             registro(usuario)
         elif opcionlog == 2:
             if inicio(usuario) == 1:
                 opcion = 0
-                dicc_alumnos = diccio_alumnos(numAlumnos)
-                matrizmaterias = crearmatriz_materias(numAlumnos)
-                dicc_notas = creardicc_notas(dicc_alumnos)    
-                combinados = combinado(dicc_alumnos, matrizmaterias, dicc_notas)
+                dicc_alumnos = creardicc_alumnos(numAlumnos)
+                dicc_materias = creardicc_materias()
+                dicc_notas = creardicc_notas(dicc_alumnos)    #X
+                combinados = combinado(dicc_alumnos, dicc_materias, dicc_notas)
                 while opcion != 5:
                     menuT()
                     print()
@@ -35,7 +37,7 @@ def main():
                         aux = int(input('Ingrese la acción que desee, indicando su número: '))
                         if aux != 5:
                             if aux == 1:
-                                dicc_alumnos, combinados = agregar_alumno(dicc_alumnos, combinados, matrizmaterias)
+                                dicc_alumnos, combinados = agregar_alumno(dicc_alumnos, combinados, dicc_materias)
                             elif aux == 2:
                                 leer_alumno(dicc_alumnos)
                             elif aux == 3:
@@ -53,11 +55,11 @@ def main():
                             aux = int(input('Ingrese la acción que desee, indicando su número: '))
                             if aux != 4:
                                 if aux == 1:
-                                    matrizmaterias = agregar_materia(matrizmaterias)
+                                    dicc_materias = agregar_nueva_materia(dicc_materias)
                                 elif aux == 2:
-                                    matrizmaterias = eliminar_materia(matrizmaterias)
+                                    dicc_materias = eliminar_materia(dicc_materias)
                                 elif aux == 3:
-                                    tablamatriz(matrizmaterias)
+                                    tablamatriz(dicc_materias)
                                 elif aux == 4:
                                     print('Saliendo...')
                                 else:
@@ -80,7 +82,7 @@ def main():
                                 print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 4')
                             
                     elif opcion == 4:
-                        combinados = combinado(dicc_alumnos, matrizmaterias, dicc_notas)
+                        combinados = combinado(dicc_alumnos, dicc_materias, dicc_notas)
                         tabla(combinados)
                     elif opcion == 5:
                         print('Saliendo...')
