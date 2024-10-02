@@ -1,10 +1,10 @@
-import random
+import re, collections, random
 
-def diccio_alumnos(x):
+def dicc_alumnos(x):
     diccalumnos = []
     while x>=1:
-        legajo = random.randint(0,999999999)
-        cad = str(legajo).zfill(9)
+        legajo = random.randint(111111111,999999999)
+        
         nombre = random.choice(['Lucas', 'Maximo', 'Franco', 'Felipe', 'Noah', 'Juan', 'Guillermo', 'Pablo', 'Agustin'])
         apellido = random.choice(['Ghiglione','Bramuglia','Collura','Remonteo', 'Gomez', 'Huchan', 'Fernandez', 'Gonzalez', 'Perez', 'Garcia'])
         diccalumnos.append (
@@ -21,58 +21,75 @@ def diccio_alumnos(x):
     return diccalumnos
 #funciona
 
-def crearmatriz_materias(x):
-    turnos = ['Mañana', 'Tarde', 'Noche']
-    materias = ['Programacion I', 'Fundamentos de Quimica', 'Sistemas de Representacion', 'Matematica Discreta', 'Algebra', 'Arquitectura de computadores']
+def creardicc_materias():
+    turnos = ('Mañana', 'Tarde', 'Noche')
+    materias = ('Programación I', 'Fundamentos de Quimica', 'Sistemas de Representación', 'Matematica Discreta', 'Algebra', 'Arquitectura de computadores')
+    dicc_final = []
+    CodigosNoUsados = set(range(111, 999))
+    cont = collections.defaultdict(lambda: collections.defaultdict(int))# crea dicc ==> {'':{'':0}}
+    
+    while CodigosNoUsados:# tuve que hacer un bucle en base a los elementod de codigos no usados, no me cierra
+        for turno in turnos:
+            materias_disponibles = list(materias)
+            
+            for _ in range(len(materias)*3):  # materias * turnos
+                limite = [m for m in materias if cont[turno][m] < 3]
+                
+                if not materias_disponibles or not CodigosNoUsados:
+                    return dicc_final
+                
+                codigo = random.choice(list(CodigosNoUsados))
+                CodigosNoUsados.remove(codigo)
+                
+                materia = random.choice(materias_disponibles)
+                
+                if cont[turno][materia] < 3:
+                    cont[turno][materia] += 1
+                    dicc_final.append  ({
+                        'Codigo': codigo,
+                        'Turno': turno,
+                        'Materia': materia
+                    })
+                    
+    
+    return dicc_final
+        
+        
 
-    matriz_materias = []
-    codigos_rep = []
-    for i in range(x):
-        for i in range(18):# 18 = len(turnos) * len(materias) => total de materias x turnos 3x6
-            codigo = random.randint(1, 1324)
-            while codigo in codigos_rep:
-                codigo = random.randint(1, 1324)
-            codigos_rep.append(codigo)
-        turno = random.choice(turnos)
-        materia = random.choice(materias)
-        matriz_materias.append([codigo, materia, turno])
-        codigos_rep.append(codigo)
-    return matriz_materias
 
-def creardicc_notas(x):
-    matriznotas = [['Parcial 1', 'Parcial 2', 'Final']]
-    matriznotas = []
-    for alumno in x[1:]:
-        legajo = str(alumno['Legajos'])
-        for i in range(len(legajo)):
+def creardicc_notas(x):#matriz cambiar nombre
+    diccio_notas = [] #matriz cambiar nombre
+    for l in x[1:]:
+        
+        for i in range(len(x)):
+            
             parcial1 = random.randint(1,10)
             parcial2 = random.randint(1,10)
+            
             if parcial1 >= 8 and parcial2 >= 8:
                 final = 'Promocion'
             elif parcial1 <4 and parcial2 <4:
                 final = 'Recursa'
             else:
                 final = random.randint(1,10)
-            matriznotas.append(
+            diccio_notas.append(
                 {
                     'Parcial 1' : parcial1,
                     'Parcial 2' : parcial2,
                     'Final' : final
                 }
             )
-    return matriznotas
+    return diccio_notas
 
 def combinado(diccalumnos, matrizmateria, matriznotas):
     matriz_combinada = []
     
 
-    matriz_combinada.append(['Legajo', 'Nombre', 'Apellido', 'Código Materia', 'Materia', 'Turno', 'Parcial 1', 'Parcial 2', 'Final'])
+    matriz_combinada.append(['Legajo', 'Código Materia', 'Materia', 'Turno', 'Parcial 1', 'Parcial 2', 'Final'])
 
     for alumno, materia, nota in zip(diccalumnos, matrizmateria, matriznotas):
         fila = [
             alumno['Legajos'],
-            alumno['Nombres'],
-            alumno['Apellidos'],
             materia[0],  #codigo de materia
             materia[1],  # nombre de la materia
             materia[2],  #turno
