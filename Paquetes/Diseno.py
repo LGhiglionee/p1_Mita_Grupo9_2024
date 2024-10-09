@@ -11,7 +11,8 @@ def menuA():
     print('2. Leer alumno')
     print('3. Actualizar alumno')
     print('4. Eliminar alumno')
-    print('5. Salir')
+    print('5. Asingar materia a alumno')
+    print('6. Salir')
     
 def menuM():  
     print('1. Agregar nueva materia')
@@ -49,8 +50,7 @@ def tabla(x):
     
     encabezado()
     filas()
+
 def tabladicc(dicc_materia):
-    codigo, turno, materia = dicc_materia
-    print(codigo, materia, turno)
-        
-    pass
+    for mat in dicc_materia.keys():
+        print(f'{mat}, {dicc_materia[mat][0]}, {dicc_materia[mat][1]}')
