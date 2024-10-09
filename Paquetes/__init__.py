@@ -15,8 +15,10 @@ __all__ = [
     'registro', 'inicio',
     
     #funciones de matrices
-    'creardicc_alumnos', 'creardicc_materias', 'creardicc_notas', 'combinado',
+    'creardicc_alumnos', 'creardicc_materias', 'combinado',
     
     #funciones del diseño
-    'menuA', 'menuT', 'menuN' , 'menuM' , 'tabla', 'tabladicc'
+    'menuA', 'menuT', 'menuN' , 'menuM' , 'tabla', 'tablaMateria' 
+    
+  
     ]
