@@ -25,32 +25,49 @@ def menuN():
     print('2. Agregar nota')
     print('3. Actualizar nota')
     print('4. Salir')
-    pass
-
 def tabla(x):
     # max de cada columna
     ancho_columna = [max(len(str(item)) for item in col) for col in zip(*x)]
     
-
+    
     # muestro el encabezado
-    def encabezado():
-        encabezado = x[0]
-        print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
+    encabezado = x[0]
+    print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
         
-        print('|' + '|'.join(f' {str(item).ljust(ancho)} ' for item, ancho in zip(encabezado, ancho_columna)) + '|')
+    print('|' + '|'.join(f' {str(item).ljust(ancho)} ' for item, ancho in zip(encabezado, ancho_columna)) + '|')
         
-        print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
+    print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
     
     #fila +---+
-    def filas():
-        for fila in x[1:]:
-            print('|' + '|'.join(f' {str(item).ljust(ancho)} ' for item, ancho in zip(fila, ancho_columna)) + '|')
-        print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
+
+    for fila in x[1:]:
+        print('|' + '|'.join(f' {str(item).ljust(ancho)} ' for item, ancho in zip(fila, ancho_columna)) + '|')
+    print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
+
+def tablaMateria(dicc_materia):
+    dicc1 = dicc_materia.copy()
+    matriz = []
+    matriz.append(['Codigo', 'Nombre'])
+    for codigo, nombre in dicc1.items():
+        matriz.append([codigo,nombre]) 
+        
+    # max de cada columna
+    ancho_columna = [max(len(str(item)) for item in col) for col in zip(*matriz)]
+    
+    # muestro el encabezado
+    
+    encabezado = matriz[0]
+    print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
+        
+    print('|' + '|'.join(f' {str(item).ljust(ancho)} ' for item, ancho in zip(encabezado, ancho_columna)) + '|')
+        
+    print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
+    
+    #fila +---+
+    for fila in matriz[1:]:
+        print('|' + '|'.join(f' {str(item).ljust(ancho)} ' for item, ancho in zip(fila, ancho_columna)) + '|')
+    print('-'.join(['-' * (ancho + 2) for ancho in ancho_columna]))# la linea
+    
+
 
     
-    encabezado()
-    filas()
-
-def tabladicc(dicc_materia):
-    for mat in dicc_materia.keys():
-        print(f'{mat}, {dicc_materia[mat][0]}, {dicc_materia[mat][1]}')

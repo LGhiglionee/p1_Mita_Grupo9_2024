@@ -8,6 +8,10 @@ def main():
             'mail' : 'root@gmail.com'
                 }
         }
+    numAlumnos = random.randint(1,30)
+    dicc_alumnos = creardicc_alumnos(numAlumnos)
+    dicc_materias = creardicc_materias()
+    matriz_combinada = combinado(dicc_alumnos, dicc_materias)
     opcionlog = 0
     while opcionlog != 3:
         print('1. No tienes usuario? Registrate')
@@ -20,10 +24,6 @@ def main():
             registro(usuario)
         elif opcionlog == 2:
             if inicio(usuario) == 1:
-                numAlumnos = random.randint(1,30)
-                dicc_alumnos = creardicc_alumnos(numAlumnos)
-                dicc_materias = creardicc_materias()
-                matriz_combinada = combinado(dicc_alumnos, dicc_materias)
                 opcion = 0
                 while opcion != 5:
                     menuT()
@@ -44,7 +44,7 @@ def main():
                             elif aux == 4:
                                 dicc_alumnos, matriz_combinada = eliminar_alumno(dicc_alumnos, matriz_combinada)
                             elif aux == 5:
-                                matriz_combinada, dicc_materias= asignar_materias(dicc_alumnos, dicc_materias, matriz_combinada)
+                                print('Vacío')
                             elif aux == 6:
                                 print('Saliendo...')
                             else:
@@ -60,7 +60,7 @@ def main():
                                 elif aux == 2:
                                     dicc_materias, matriz_combinada = eliminar_materia(dicc_materias, matriz_combinada)
                                 elif aux == 3:
-                                    tabladicc(dicc_materias)
+                                    tablaMateria(dicc_materias)
                                 elif aux == 4:
                                     print('Saliendo...')
                                 else:
@@ -83,8 +83,12 @@ def main():
                                 print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 4')
                             
                     elif opcion == 4:
-                        matriz_combinada = combinado(dicc_alumnos, dicc_materias)
-                        tabla(matriz_combinada)
+                        aux = input('¿Desea ordenar de manera ascendente los alumnos? [y/n]: ').lower()
+                        if aux in ['y', 'yes']:
+                            matriz_ordenada = [matriz_combinada[0]] + sorted(matriz_combinada[1:], key=lambda x: x[0])
+                            tabla(matriz_ordenada)
+                        else:
+                            tabla(matriz_combinada)
                     elif opcion == 5:
                         print('Saliendo...')
                     else:

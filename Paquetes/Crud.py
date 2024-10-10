@@ -22,8 +22,8 @@ def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias):
     if entrada == 'y' or 'yes':
         aux = 1
         while aux == 1:
-            for codigo in sorted(dicc_materias.keys()):
-                print(f'Codigo: {codigo}, Materia: {dicc_materias[codigo][1]}, Turno: {dicc_materias[codigo][0]}') #muestra materias disponibles
+            for codigo, materia in dicc_materias.items():
+                print(f'Codigo: {codigo}, Materia: {materia}') #muestra materias disponibles
 
             codigoI = int(input('Ingrese código de la nueva materia: '))
             if codigoI in dicc_materias.keys(): #chequea si existe tal codigo
@@ -61,9 +61,9 @@ def eliminar_alumno(dicc_alumnos, matriz_combinada):
         print(f'Alumno con legajo {legajo} eliminado.')
 
         filas_a_eliminar = []
-        for fila in matriz_combinada[1:]:  # Slice para que no tome los encabezados
+        for fila in matriz_combinada[1:]:  # slice para que no tome los encabezados
             if fila[0] == legajo:
-                filas_a_eliminar.append(fila) #junta todas las filas que tenga ese legajo
+                filas_a_eliminar.append(fila) #junta todas las filas que tenga ese legajo // agregar un re.match ==> patrón = fila ==> ('alumno')
         for fila in filas_a_eliminar:
             matriz_combinada.remove(fila) #borra
             print('filas elimindas correctamente de la matriz.')
@@ -175,8 +175,9 @@ def leer_nota(matriz_combinada, dicc_alumnos):
 def actualizar_nota(matriz_combinada, dicc_alumnos):
     legajo = int(input("Ingrese el legajo del alumno: "))
     for fila in matriz_combinada[1:]:
-        if int(fila[0]) == legajo:
-            print(f"Nombre y apellido: {dicc_alumnos[legajo][0]},' ',{dicc_alumnos[legajo][1]}")
+        
+        if fila[0] == legajo:
+            print(f"Nombre y apellido: {dicc_alumnos[legajo][0]} {dicc_alumnos[legajo][1]}")
             print(f"Materia: ", fila[1])
             print(f"Notas actuales: Parcial 1: ",fila[2], "Parcial 2: " , fila[3] , "Final: " ,fila[4])
 
@@ -197,10 +198,12 @@ def actualizar_nota(matriz_combinada, dicc_alumnos):
                     return matriz_combinada
 
             if fila[2] != '-' and fila[3] != '-':
-                if int(fila[2]) >= 8 and int(fila[3]) >= 8:
+                if fila[2] >= 8 and fila[3] >= 8:
                     fila[4] = 'Promoción'
-                elif int(fila[2]) < 4 and int(fila[3]) < 4:
+                elif fila[2] < 4 and fila[3] < 4:
                     fila[4] = 'Recursa'
+                elif fila[2] < 4 or fila[3] < 4:
+                    fila[4]= 'Debe recuperatorio'
                 else:
                     final = input('Ingrese la nueva nota del examen final (1-10 o "-" para no cambiar): ')
                     if final != '-':
@@ -225,8 +228,8 @@ def agregar_nueva_materia(dicc_materias):
             flag = 1
     if flag == 0:
         nuevo_nombre = input('Ingrese el nombre de la materia: ').strip().capitalize()
-        turno= input('Ingrese el turno que se da la materia: ').strip().capitalize()
-        dicc_materias[nuevo_codigo] = [nuevo_nombre, turno]
+        dicc_materias[nuevo_codigo] = nuevo_nombre
+        return dicc_materias
 
 
 

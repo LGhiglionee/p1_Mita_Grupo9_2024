@@ -1,4 +1,4 @@
-import re, collections, random
+import random
 
 def creardicc_alumnos(x):
     diccalumnos = {}
@@ -9,28 +9,18 @@ def creardicc_alumnos(x):
         diccalumnos[legajo] = [nombre, apellido]
         x -= 1
     return diccalumnos
-    '''diccalumnos.sort(key = lambda x: (int(x[legajo])))# el x para que se ordene de manera ascendente
-    diccalumnos.reverse()# y esto lo pasa a descendente'''
+
 #funciona
 
 def creardicc_materias():
-    turnos = ('Mañana', 'Tarde', 'Noche')
-    materias_con_codigos = {
+    dicc_materias = {
         3180: 'Programación I',
         91218: 'Fundamentos de Química',
-        31784: 'Sistemas de Representación',          #Le puse codigo manualmente, mas facil
+        31784: 'Sistemas de Representación',          #le puse codigo manualmente, mas facil
         31283: 'Matemática Discreta',
         553123: 'Álgebra',
         11163: 'Arquitectura de Computadores'
     }
-    dicc_materias = {}
-    cont = collections.defaultdict(lambda: collections.defaultdict(int))
-
-    for turno in turnos:
-        for codigo, materia in materias_con_codigos.items():
-            if cont[turno][materia] < 3:  # Limitar a 3 asignaciones por turno y materia
-                cont[turno][materia] += 1
-                dicc_materias[codigo] = [turno, materia]
 
     return dicc_materias
 #ahí lo cambie según el profesor    
@@ -38,7 +28,7 @@ def creardicc_materias():
 
 
 
-def combinado(diccalumnos, dicc_final):
+def combinado(diccalumnos, dicc_materias):
 
     min_materias, max_materias = 0 , 5
     matriz_combinada = []
@@ -46,7 +36,7 @@ def combinado(diccalumnos, dicc_final):
     for legajo in diccalumnos.keys():
         num_materias = random.randint(min_materias, max_materias)  # pone un numero aleatorio para no todos los alumnos esten en todas las materias
         materias_asignadas = []
-        materias_disponibles = list(dicc_final.keys()) #crea una lista con todos los codigos
+        materias_disponibles = list(dicc_materias.keys()) #crea una lista con todos los codigos
         while len(materias_asignadas) < num_materias and materias_disponibles:
             codigo = random.choice(materias_disponibles)
             materias_asignadas.append(codigo)  # pone materia a alumno
