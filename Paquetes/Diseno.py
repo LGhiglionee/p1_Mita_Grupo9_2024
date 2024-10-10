@@ -11,8 +11,7 @@ def menuA():
     print('2. Leer alumno')
     print('3. Actualizar alumno')
     print('4. Eliminar alumno')
-    print('5. Asingar materia a alumno')
-    print('6. Salir')
+    print('5. Salir')
     
 def menuM():  
     print('1. Agregar nueva materia')
@@ -25,6 +24,7 @@ def menuN():
     print('2. Agregar nota')
     print('3. Actualizar nota')
     print('4. Salir')
+    
 def tabla(x):
     # max de cada columna
     ancho_columna = [max(len(str(item)) for item in col) for col in zip(*x)]
