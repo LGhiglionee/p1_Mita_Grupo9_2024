@@ -36,7 +36,7 @@ def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias):
                 ]
                 matriz_combinada.append(nuevo_ingreso)  # pone el nuevo alumno en la matriz combinada
                 aux = 0
-                print(f'Materia {dicc_materias[codigoI][1]} asignada correctamente.')
+                print(f'Materia {materia} asignada correctamente.')
             else:
                 print('No se encontró el código, intente nuevamente.')
         
