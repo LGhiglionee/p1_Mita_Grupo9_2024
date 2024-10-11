@@ -31,7 +31,7 @@ def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias):
         else:
             aux2 = 1
 
-    dicc_alumnos[legajo] = [nombre, apellido, fecha_nacimiento, mail] #agrega alumno a dicc alumnos
+    dicc_alumnos[legajo] = [nombre, apellido, mail, fecha_nacimiento] #agrega alumno a dicc alumnos
 
     entrada = input('Desea asignar una nueva materia a este alumno? [y/n] ').lower()
     
