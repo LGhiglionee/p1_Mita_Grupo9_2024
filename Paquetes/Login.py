@@ -5,15 +5,19 @@ def validar_mail(mail):
     patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     return re.match(patron, mail) is not None
 
+def validar_fecha_nacimiento(fecha_nacimiento):
+    patron= r'^\d{2}/\d{2}/\d{4}$'
+    return re.match(patron, fecha_nacimiento) is not None
+
 def registro(usuario):#registro de usuarios
     flag = 0
     while flag == 0:
-        nombre_usuario = input('ingrese su nuevo usuario: ').strip().lower()
-        contrasena = input('ingrese su nueva contra: ').strip()
+        nombre_usuario = input('Ingrese su nuevo usuario: ').strip().lower()
+        contrasena = input('Ingrese su nueva contrasena: ').strip()
         mail= input('Ingrese su correo electronico: ').strip().lower()
-        if validar_mail(mail) == None:
+        if  not validar_mail(mail):
             print('Correo invalido')
-            
+            flag=0
         
         if nombre_usuario in usuario:# verifica en caso de repeticion de usuarios
             if usuario[nombre_usuario]['contrasena'] == contrasena:
