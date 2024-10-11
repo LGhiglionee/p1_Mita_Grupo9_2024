@@ -1,4 +1,5 @@
-import random
+from random import *
+from .Login import *
 
 def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias):
     flag = 1
@@ -13,7 +14,24 @@ def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias):
     legajo= int(legajo)
     nombre = input('Ingrese el nombre: ').title()
     apellido = input('Ingrese el apellido: ').title()
-    dicc_alumnos[legajo] = [nombre, apellido] #agrega alumno a dicc alumnos
+
+    aux= 0
+    while aux == 0:
+        fecha_nacimiento = input('Ingrese tu fecha de nacimiento en formato (DD/MM/YYYY): ')
+        if not validar_fecha_nacimiento(fecha_nacimiento):
+            print('Fecha de nacimiento invalida. Porfavor revise como la introdujo')
+        else:
+            aux = 1
+
+    aux2=0
+    while aux2 == 0:
+        mail= input('Ingrese tu mail: ')
+        if not validar_mail(mail):
+            print('Mail invalido, Porfavor revise.')
+        else:
+            aux2 = 1
+
+    dicc_alumnos[legajo] = [nombre, apellido, fecha_nacimiento, mail] #agrega alumno a dicc alumnos
 
     entrada = input('Desea asignar una nueva materia a este alumno? [y/n] ').lower()
     
@@ -82,34 +100,43 @@ def leer_alumno(dicc_alumnos):
         if alumno == legajo:
             print('El alumno ha sido encontrado')
             print('Datos del alumnos: ', end=' ')
-            print(f'Legajo: {legajo}, Nombre: {dicc_alumnos[legajo][0]}, Apellido: {dicc_alumnos[legajo][1]}')
+            print(f'Legajo: {legajo}, Nombre: {dicc_alumnos[legajo][0]}, Apellido: {dicc_alumnos[legajo][1]}, Mail: {dicc_alumnos[legajo][2]}, Fecha de nacimiento: {dicc_alumnos[legajo][3]}')
             encontrado= 1
     if encontrado == 0:
         print('No se encontro el alumno')
     return
 
 
-def actualizar_alumno(dicc_alumnos, matriz_combinada):
+def actualizar_alumno(dicc_alumnos):
 
     legajo = int(input('Ingrese el legajo del alumno a actualizar: '))
     for alumno in dicc_alumnos.keys():
         if alumno == legajo:
             nuevo_nombre = input('Ingrese el nuevo nombre: ').title()
             nuevo_apellido = input('Ingrese el nuevo apellido: ').title()
+            aux= 0
+            while aux == 0:
+                fecha_nacimiento = input('Ingrese tu fecha de nacimiento en formato (DD/MM/YYYY): ')
+                if not validar_fecha_nacimiento(fecha_nacimiento):
+                    print('Fecha de nacimiento invalida. Porfavor revise como la introdujo')
+                else:
+                    aux = 1
+
+            aux2=0
+            while aux2 == 0:
+                mail= input('Ingrese tu mail: ')
+                if not validar_mail(mail):
+                    print('Mail invalido, Porfavor revise.')
+                else:
+                    aux2 = 1
+
             if nuevo_apellido and nuevo_nombre:
-                dicc_alumnos[legajo] = [nuevo_nombre, nuevo_apellido]
-            flag = 1
-            #actualizar también en combinados
-            while flag == 1:
-                for fila in matriz_combinada [1:]:
-                    if fila[0] == legajo:
-                        fila[1] = nuevo_nombre
-                        fila[2] = nuevo_apellido
-                        flag = 0
-            print('Datos actualizados.')
-            return dicc_alumnos, matriz_combinada
+                dicc_alumnos[legajo] = [nuevo_nombre, nuevo_apellido, mail, fecha_nacimiento]
+                print('Datos Actualizados.')
+                return dicc_alumnos
+            
     print('No se ha encontrado el alumno a actualizar')
-    return dicc_alumnos, matriz_combinada
+
 
 def agregar_nota(matriz_combinada, dicc_alumnos):
     
@@ -256,5 +283,9 @@ def eliminar_materia(dicc_materias, matriz_combinada):
     return dicc_materias , matriz_combinada
 
 
-def asignarmateria():
-    pass
+def asignarmateria(matriz_combinada):
+    legajo = int(input('Ingrese el legajo del alumno al que le quieras asignar una materia '))
+    for alumno in matriz_combinada:
+        legajo = alumno[0]
+        if legajo == alumno:
+            print('El alumno ha sido encontrado')
