@@ -25,6 +25,7 @@ def main():
                 registro(usuario)
             elif opcionlog == 2:
                 if inicio(usuario) == 1:
+                    print()
                     opcion = 0
                     while opcion != 6:
                         try:
@@ -42,7 +43,7 @@ def main():
                                     elif aux == 2:
                                         leer_alumno(dicc_alumnos)
                                     elif aux == 3:
-                                        dicc_alumnos, matriz_combinada = actualizar_alumno(dicc_alumnos, matriz_combinada)
+                                        dicc_alumnos= actualizar_alumno(dicc_alumnos)
                                     elif aux == 4:
                                         dicc_alumnos, matriz_combinada = eliminar_alumno(dicc_alumnos, matriz_combinada)
                                     elif aux == 5:
@@ -117,5 +118,6 @@ def main():
                     print()
         except ValueError:
             print('Porfavor, debe ingresar un numero y del rango pedido (1-3), no un caracter')
+            print()
 
 main()
