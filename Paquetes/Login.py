@@ -11,7 +11,6 @@ def registro(usuario):#registro de usuarios
         nombre_usuario = input('ingrese su nuevo usuario: ').strip().lower()
         contrasena = input('ingrese su nueva contra: ').strip()
         mail= input('Ingrese su correo electronico: ').strip().lower()
-
         if validar_mail(mail) == None:
             print('Correo invalido')
             
@@ -20,9 +19,9 @@ def registro(usuario):#registro de usuarios
             if usuario[nombre_usuario]['contrasena'] == contrasena:
                 print('su usuario ya cuenta con un registro')
                 print()
-                confirm = input('Desea cancelar su registro? [y/n]: ')
+                confirm = input('Desea cancelar su registro? [y/n]: ').lower()
                 print()
-                if confirm.lower in ['y', 'yes']:
+                if confirm in ['y', 'yes']:
                     flag = 1
         else:
             usuario[nombre_usuario] = {'contrasena' : contrasena, 'mail' : mail}
