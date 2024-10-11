@@ -26,7 +26,7 @@ def main():
             elif opcionlog == 2:
                 if inicio(usuario) == 1:
                     opcion = 0
-                    while opcion != 5:
+                    while opcion != 6:
                         try:
                             menuT()
                             print()
@@ -90,6 +90,19 @@ def main():
                                 else:
                                     tabla(matriz_combinada)
                             elif opcion == 5:
+                                menuP()
+                                print()
+                                aux= int(input('Ingrese la accion que desee: '))
+                                if aux != 3:
+                                    if aux == 1:
+                                        Promedio(matriz_combinada, dicc_alumnos, dicc_materias)
+                                    elif aux == 2:
+                                        Promedio_todas_Materias(matriz_combinada, dicc_alumnos)
+                                    elif aux == 3:
+                                        print('saliendo...')
+                                    else:
+                                        print('Ingrese un numero valido')
+                            elif opcion == 6:
                                 print('Saliendo...')
                             else:
                                 print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 4.')
@@ -98,7 +111,6 @@ def main():
                                 print('Volviendo al menu...')
                 elif opcionlog == 3:
                     print('Saliendo....')
-                    login = 1
                 else:
                     print()
                     print('Ingreso un valor que no corresponde, repita el proceso')
