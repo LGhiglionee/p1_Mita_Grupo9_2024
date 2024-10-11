@@ -3,9 +3,9 @@ def menuT():
     print('2. Materias')
     print('3. Notas')
     print('4. Mostrar tabla')
-    print('5. Salir')
+    print('5. Artimetrica Alumnos')
+    print('6. Salir')
     
-
 def menuA():
     print('1. Agregar alumno')
     print('2. Leer alumno')
@@ -24,6 +24,11 @@ def menuN():
     print('2. Agregar nota')
     print('3. Actualizar nota')
     print('4. Salir')
+
+def menuP():
+    print('1. Promedio de alumno por materia')
+    print('2. Promedio de alumno en todas las materias inscriptas')
+    print('3. Salir')
     
 def tabla(x):
     # max de cada columna
