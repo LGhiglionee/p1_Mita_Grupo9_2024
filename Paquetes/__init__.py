@@ -18,7 +18,10 @@ __all__ = [
     'creardicc_alumnos', 'creardicc_materias', 'combinado',
     
     #funciones del diseño
-    'menuA', 'menuT', 'menuN' , 'menuM' , 'tabla', 'tablaMateria' 
+    'menuA', 'menuT', 'menuN' , 'menuM' , 'tabla', 'tablaMateria', 'menuP', 
+
+    #Funcion aritmetrica
+    'Promedio', 'Promedio_todas_Materias'
     
   
     ]
