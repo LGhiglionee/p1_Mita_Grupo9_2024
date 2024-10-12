@@ -37,7 +37,7 @@ def main():
                                 print()
                                 aux = 0
                                 aux = int(input('Ingrese la acción que desee, indicando su número: '))
-                                if aux != 5:
+                                if aux != 6:
                                     if aux == 1:
                                         dicc_alumnos, matriz_combinada = agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias)
                                     elif aux == 2:
@@ -46,7 +46,9 @@ def main():
                                         dicc_alumnos= actualizar_alumno(dicc_alumnos)
                                     elif aux == 4:
                                         dicc_alumnos, matriz_combinada = eliminar_alumno(dicc_alumnos, matriz_combinada)
-                                    elif aux == 5:
+                                    elif aux== 5:
+                                        matriz_combinada = asignarmateria(matriz_combinada, dicc_alumnos, dicc_materias)
+                                    elif aux == 6:
                                         print('Saliendo...')
                                     else:
                                         print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 5')
