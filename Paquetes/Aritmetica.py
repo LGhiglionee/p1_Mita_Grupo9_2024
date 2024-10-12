@@ -19,13 +19,13 @@ def Promedio(matriz_combinada, dicc_alumnos, dicc_materias): #Lo que tengo pensa
                 elif final == 'Recursa':
                     promedio = (parcial1 + parcial2) / 2
                 elif final != '-':
-                    final = float(final)
-                    promedio = (parcial1 + parcial2 + final) / 3
+                    promediopar = (parcial1 + parcial2)/2
+                    promedio = (promediopar + final)/2
                 else:
                     promedio = (parcial1 + parcial2) / 2
                 
                 print(f'El promedio del alumno {dicc_alumnos[legajo][0]} {dicc_alumnos[legajo][1]} '
-                      f'en la materia {dicc_materias[codigo_materia]} es {promedio:.2f}')
+                      f'en la materia {dicc_materias[codigo_materia]} es {promedio}')
                 
                 if final == 'Promoción':
                     print("El alumno ha promocionado la materia.")
@@ -50,13 +50,32 @@ def Promedio_todas_Materias(matriz_combinada, dicc_alumnos):
     try:
         legajo= int(input('Ingrese el legajo del alumno: '))
         promedio = 0
+        if legajo not in dicc_alumnos:
+            raise ValueError('El legajo ingresado no pertenece a ningun alumno')
         for fila in matriz_combinada:
-            leg = fila[0]
-            if legajo == leg:
-                notas = fila[2:]
-                promedio= sum(notas)/len(notas)
+            if legajo == fila[0]:
+                parcial1 = fila[2]
+                parcial2 = fila[3]
+                final = fila[4]
+
+                assert parcial1 != '-', 'Falta la nota del primer parcial'
+                assert parcial2 != '-', 'Falta la nota del segundo parcial'
+                if final == 'Promoción':
+                    promedio = (parcial1 + parcial2) / 2
+                elif final == 'Recursa':
+                    promedio = (parcial1 + parcial2) / 2
+                elif final != '-':
+                    promediopar = (parcial1 + parcial2)/2
+                    promedio = (promediopar + final)/2
+                else:
+                    promedio = (parcial1 + parcial2) / 2
                 promedio_materias.append(promedio)
+
         promedio_total= sum(promedio_materias)/len(promedio_materias)
         print(f'El promedio del alumno {dicc_alumnos[legajo][0]} {dicc_alumnos[legajo][1]} es {promedio_total}')
     except TypeError:
         print('Ha habido un problema. Hay alguna/s instancia/s que no tiene nota cargada')
+    except AssertionError as msj:
+        print(f'Ha ocurrido un error. {msj}')
+    except ValueError as nopertenece:
+        print(f'{nopertenece}')
