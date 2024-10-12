@@ -283,9 +283,13 @@ def eliminar_materia(dicc_materias, matriz_combinada):
     return dicc_materias , matriz_combinada
 
 
-def asignarmateria(matriz_combinada):
-    legajo = int(input('Ingrese el legajo del alumno al que le quieras asignar una materia '))
-    for alumno in matriz_combinada:
-        legajo = alumno[0]
-        if legajo == alumno:
-            print('El alumno ha sido encontrado')
+def asignarmateria(matriz_combinada, dicc_alumnos, dicc_materias):
+    legajo = int(input('Ingrese el legajo del alumno al que le quieras asignar una materia: '))
+    if legajo not in dicc_alumnos:
+            print('No se encontro al alumno')
+            return
+    codigo_materia= int(input(f'Ingrese el codigo de la materia que le quieras asignarle a {dicc_alumnos[legajo][0]} {dicc_alumnos[legajo][1]}: '))
+    if codigo_materia in dicc_materias:
+        matriz_combinada.append([legajo, codigo_materia, '-', '-','-'])
+        print(f'La materia {dicc_materias[codigo_materia]} fue asignada correctamente al alumno.')
+        return matriz_combinada
