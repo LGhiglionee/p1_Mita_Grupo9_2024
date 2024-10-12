@@ -11,7 +11,8 @@ def menuA():
     print('2. Leer alumno')
     print('3. Actualizar alumno')
     print('4. Eliminar alumno')
-    print('5. Salir')
+    print('5. Asignar materia a alumno')
+    print('6. Salir')
     
 def menuM():  
     print('1. Agregar nueva materia')
