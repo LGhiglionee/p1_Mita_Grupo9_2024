@@ -61,7 +61,17 @@ def combinado(diccalumnos, dicc_materias):
             materias_asignadas.append(codigo)  # pone materia a alumno
             materias_disponibles.remove(codigo)  # la saca de la otra lsta, para que no hayan repetidas
         for codigo in materias_asignadas:
-            matriz_combinada.append([legajo, codigo, '-', '-', '-']) #hace la linea de la matriz
+            parcial1 = random.randint(1,10)
+            parcial2 = random.randint(1,10)
+            if parcial1 >= 8 and parcial2 >=8:
+                final= 'Promocion'
+            elif parcial1 <4 and parcial2<4:
+                final= 'Recursa'
+            elif parcial1 < 4 or parcial2 < 4:
+                final= 'Debe recuperatorio'
+            else:
+                final= random.randint(1,10)
+            matriz_combinada.append([legajo, codigo, parcial1, parcial2, final]) #hace la linea de la matriz
     arch= EscribirArchivo(matriz_combinada)
 
     return matriz_combinada, arch
