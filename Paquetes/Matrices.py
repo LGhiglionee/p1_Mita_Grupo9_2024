@@ -30,6 +30,20 @@ def creardicc_materias():
     return dicc_materias
 #ahí lo cambie según el profesor    
         
+def EscribirArchivo(matriz_combinada):
+    try:
+        arch= open('Archivo.txt', 'w', encoding= 'UTF-8')
+        lineas = [f'{fila[0]};{fila[1]};{fila[2]};{fila[3]};{fila[4]};\n' for fila in matriz_combinada]
+        arch.writelines(lineas)
+        
+        print('Carga de datos finalizada')
+    except OSError:
+        print('No se pudo crear el archivo')
+    except ValueError:
+        print('No se pudo convertir el tipo de dato del legajo')
+    finally:
+        arch.close()
+    return arch
 
 
 
@@ -48,5 +62,6 @@ def combinado(diccalumnos, dicc_materias):
             materias_disponibles.remove(codigo)  # la saca de la otra lsta, para que no hayan repetidas
         for codigo in materias_asignadas:
             matriz_combinada.append([legajo, codigo, '-', '-', '-']) #hace la linea de la matriz
+    arch= EscribirArchivo(matriz_combinada)
 
-    return matriz_combinada
+    return matriz_combinada, arch
