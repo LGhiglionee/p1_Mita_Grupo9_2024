@@ -11,7 +11,7 @@ def main():
     numAlumnos = random.randint(1,30)
     dicc_alumnos = creardicc_alumnos(numAlumnos)
     dicc_materias = creardicc_materias()
-    matriz_combinada = combinado(dicc_alumnos, dicc_materias)
+    matriz_combinada , arch = combinado(dicc_alumnos, dicc_materias)
     opcionlog = 0
     while opcionlog != 3:
         try:
