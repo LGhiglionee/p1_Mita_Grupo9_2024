@@ -10,20 +10,20 @@ def Promedio(matriz_combinada, dicc_alumnos, dicc_materias): #Lo que tengo pensa
                 parcial1 = fila[2]
                 parcial2 = fila[3]
                 final = fila[4]
+                calculo = lambda parcial1, parcial2: (parcial1 + parcial2) / 2
+                calculo_par = lambda parcial1, parcial2: (parcial1 + parcial2) / 2
                 
                 if parcial1 == '-' or parcial2 == '-':
-                    raise ValueError("Faltan notas de parciales")             
-                
+                    raise ValueError
                 if final == 'Promoción':
-                    promedio = (parcial1 + parcial2) / 2
+                    promedio = calculo(parcial1, parcial2)
                 elif final == 'Recursa':
-                    promedio = (parcial1 + parcial2) / 2
+                    promedio = calculo(parcial1, parcial2)
                 elif final != '-':
-                    promediopar = (parcial1 + parcial2)/2
-                    promedio = (promediopar + final)/2
+                    promedio_par = calculo_par(parcial1, parcial2)
+                    promedio = calculo(promedio_par, final)
                 else:
-                    promedio = (parcial1 + parcial2) / 2
-                
+                    promedio = calculo(parcial1, parcial2)
                 print(f'El promedio del alumno {dicc_alumnos[legajo][0]} {dicc_alumnos[legajo][1]} '
                       f'en la materia {dicc_materias[codigo_materia]} es {promedio}')
                 
@@ -35,15 +35,16 @@ def Promedio(matriz_combinada, dicc_alumnos, dicc_materias): #Lo que tengo pensa
                     print(f"Nota del examen final: {final}")
                 else:
                     print("El alumno aún no ha rendido el examen final.")
-                
+
                 return
         
         print("No se encontró el alumno o la materia especificada.")
     
-    except ValueError as parciales:
-        print(f'Hubo un problema, {parciales}')
+    except ValueError:
+        print(f'Hubo un problema, faltan notas de parciales')
     except TypeError:
         print('Hubo un problema. Hay alguna/s instancia/s que no tiene nota cargada correctamente.')
+        print(type(promedio))
 
 def Promedio_todas_Materias(matriz_combinada, dicc_alumnos):
     promedio_materias= []
