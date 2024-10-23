@@ -1,86 +1,88 @@
 import random
+import json
 
-def diccio_alumnos(x):
-    diccalumnos = []
-    while x>=1:
-        legajo = random.randint(0,999999999)
-        cad = str(legajo).zfill(9)
+def creardicc_alumnos(x):
+    diccalumnos = {}
+    while x >= 1:
+        legajo = random.randint(111111111, 999999999)
         nombre = random.choice(['Lucas', 'Maximo', 'Franco', 'Felipe', 'Noah', 'Juan', 'Guillermo', 'Pablo', 'Agustin'])
-        apellido = random.choice(['Ghiglione','Bramuglia','Collura','Remonteo', 'Gomez', 'Huchan', 'Fernandez', 'Gonzalez', 'Perez', 'Garcia'])
-        diccalumnos.append (
-        {
-            'Legajos' : legajo,
-            'Nombres' : nombre,
-            'Apellidos' : apellido
-        }
-        )
+        apellido = random.choice(['Ghiglione', 'Bramuglia', 'Collura', 'Remonteo', 'Gomez', 'Huchan', 'Fernandez', 'Gonzalez', 'Perez', 'Garcia'])
+        mail = ''.join([nombre[0].lower(), apellido.lower(), '@gmail.com'])
+        dia= random.randint(1,31) #elije un dia posible
+        mes= random.randint(1,12) #meses posibles
+        anio= random.randint(1960, 2007)
+        fecha_nacimiento = '{:02d}/{:02d}/{}'.format(dia,mes,anio)
+        diccalumnos[legajo] = [nombre, apellido, mail, fecha_nacimiento]
         x -= 1
-        diccalumnos.sort(key = lambda x: (int(x["Legajos"])))# el x para que se ordene de manera ascendente
-        diccalumnos.reverse()# y esto lo pasa a descendente
+    try:
+        with open('ArchivoAlummos.json', 'w', encoding= 'UTF-8') as archivo:
+            json.dump(diccalumnos, archivo, ensure_ascii=False, indent = 2)   #el ensure es para que respete el utf-8   
+    except:
+        print('No se puede abrir el archivo')
+
+    return diccalumnos, archivo
+
+
+
+def creardicc_materias():
+    dicc_materias = {
+        3180: 'Programación I',
+        91218: 'Fundamentos de Química',
+        31784: 'Sistemas de Representación',          #le puse codigo manualmente, mas facil
+        31283: 'Matemática Discreta',
+        553123: 'Álgebra',
+        11163: 'Arquitectura de Computadores'
+    }
+    try:
+        with open('ArchivoMaterias.json', 'w', encoding= 'UTF-8') as archivo:
+            json.dump(dicc_materias, archivo, ensure_ascii=False, indent = 2)   
+    except:
+        print('No se puede abrir el archivo')
     
-    return diccalumnos
-#funciona
+    return dicc_materias, archivo
+ 
+        
+def EscribirArchivo(matriz_combinada):
+    try:
+        with open('ArchivoMatriz.txt', 'w', encoding= 'UTF-8') as arch:
+            lineas = [f'{fila[0]};{fila[1]};{fila[2]};{fila[3]};{fila[4]};\n' for fila in matriz_combinada]
+            arch.writelines(lineas)
+        
+        print('Carga de datos finalizada')
+    except OSError:
+        print('No se pudo crear el archivo')
+    except ValueError:
+        print('No se pudo convertir el tipo de dato del legajo')
+    finally:
+        return arch
 
-def crearmatriz_materias(x):
-    turnos = ['Mañana', 'Tarde', 'Noche']
-    materias = ['Programacion I', 'Fundamentos de Quimica', 'Sistemas de Representacion', 'Matematica Discreta', 'Algebra', 'Arquitectura de computadores']
 
-    matriz_materias = []
-    codigos_rep = []
-    for i in range(x):
-        for i in range(18):# 18 = len(turnos) * len(materias) => total de materias x turnos 3x6
-            codigo = random.randint(1, 1324)
-            while codigo in codigos_rep:
-                codigo = random.randint(1, 1324)
-            codigos_rep.append(codigo)
-        turno = random.choice(turnos)
-        materia = random.choice(materias)
-        matriz_materias.append([codigo, materia, turno])
-        codigos_rep.append(codigo)
-    return matriz_materias
 
-def creardicc_notas(x):
-    matriznotas = [['Parcial 1', 'Parcial 2', 'Final']]
-    matriznotas = []
-    for alumno in x[1:]:
-        legajo = str(alumno['Legajos'])
-        for i in range(len(legajo)):
+def combinado(diccalumnos, dicc_materias):
+
+    min_materias, max_materias = 0 , 5
+    matriz_combinada = []
+    matriz_combinada.append(['Legajo', 'Código Materia', 'Parcial 1', 'Parcial 2', 'Final'])
+    for legajo in diccalumnos.keys():
+        num_materias = random.randint(min_materias, max_materias)  # pone un numero aleatorio para no todos los alumnos esten en todas las materias
+        materias_asignadas = []
+        materias_disponibles = list(dicc_materias.keys()) #crea una lista con todos los codigos
+        while len(materias_asignadas) < num_materias and materias_disponibles:
+            codigo = random.choice(materias_disponibles)
+            materias_asignadas.append(codigo)  # pone materia a alumno
+            materias_disponibles.remove(codigo)  # la saca de la otra lsta, para que no hayan repetidas
+        for codigo in materias_asignadas:
             parcial1 = random.randint(1,10)
             parcial2 = random.randint(1,10)
-            if parcial1 >= 8 and parcial2 >= 8:
-                final = 'Promocion'
-            elif parcial1 <4 and parcial2 <4:
-                final = 'Recursa'
+            if parcial1 >= 8 and parcial2 >=8:
+                final= 'Promocion'
+            elif parcial1 <4 and parcial2<4:
+                final= 'Recursa'
+            elif parcial1 < 4 or parcial2 < 4:
+                final= 'Debe recuperatorio'
             else:
-                final = random.randint(1,10)
-            matriznotas.append(
-                {
-                    'Parcial 1' : parcial1,
-                    'Parcial 2' : parcial2,
-                    'Final' : final
-                }
-            )
-    return matriznotas
+                final= random.randint(1,10)
+            matriz_combinada.append([legajo, codigo, parcial1, parcial2, final]) #hace la linea de la matriz
+    arch= EscribirArchivo(matriz_combinada)
 
-def combinado(diccalumnos, matrizmateria, matriznotas):
-    matriz_combinada = []
-    
-
-    matriz_combinada.append(['Legajo', 'Nombre', 'Apellido', 'Código Materia', 'Materia', 'Turno', 'Parcial 1', 'Parcial 2', 'Final'])
-
-    for alumno, materia, nota in zip(diccalumnos, matrizmateria, matriznotas):
-        fila = [
-            alumno['Legajos'],
-            alumno['Nombres'],
-            alumno['Apellidos'],
-            materia[0],  #codigo de materia
-            materia[1],  # nombre de la materia
-            materia[2],  #turno
-            nota['Parcial 1'],
-            nota['Parcial 2'],
-            nota['Final']
-        ]
-        matriz_combinada.append(fila)
-        
-    
-    return matriz_combinada
+    return matriz_combinada, arch

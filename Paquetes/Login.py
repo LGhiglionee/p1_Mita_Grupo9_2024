@@ -1,30 +1,31 @@
 import re
 
 def validar_mail(mail):
-    # Patrón para validar un correo electrónico
+    # patron para validar un correo electrónico
     patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-    value= re.match(patron, mail)
-    if value != None:
-        return value 
+    return re.match(patron, mail) is not None
+
+def validar_fecha_nacimiento(fecha_nacimiento):
+    patron= r'^\d{2}/\d{2}/\d{4}$'
+    return re.match(patron, fecha_nacimiento) is not None
 
 def registro(usuario):#registro de usuarios
     flag = 0
     while flag == 0:
-        nombre_usuario = input('ingrese su nuevo usuario: ').strip().lower()
-        contrasena = input('ingrese su nueva contra: ').strip()
+        nombre_usuario = input('Ingrese su nuevo usuario: ').strip().lower()
+        contrasena = input('Ingrese su nueva contrasena: ').strip()
         mail= input('Ingrese su correo electronico: ').strip().lower()
-
-        if not validar_mail(mail):
+        if  not validar_mail(mail):
             print('Correo invalido')
-            continue
+            flag=0
         
         if nombre_usuario in usuario:# verifica en caso de repeticion de usuarios
             if usuario[nombre_usuario]['contrasena'] == contrasena:
                 print('su usuario ya cuenta con un registro')
                 print()
-                confirm = input('Desea cancelar su registro? [y/n]: ')
+                confirm = input('Desea cancelar su registro? [y/n]: ').lower()
                 print()
-                if confirm.lower in ['y', 'yes']:
+                if confirm in ['y', 'yes']:
                     flag = 1
         else:
             usuario[nombre_usuario] = {'contrasena' : contrasena, 'mail' : mail}
@@ -34,12 +35,12 @@ def registro(usuario):#registro de usuarios
 def inicio (usuario):#verificacion de usuario
     ingreso = input('Ingrese su nombre de usuario o correo electrónico: ').strip().lower()
     contrasena = input('Ingrese su contraseña: ').strip()
-    if "@" in ingreso and "." in ingreso: # Si el ingreso contiene un "@" y un "."
-        if not validar_mail(ingreso): #Verifica que siga el patron de mail
+    if "@" in ingreso and "." in ingreso: # si el ingreso contiene un "@" y un "."
+        if not validar_mail(ingreso): #verifica que siga el patron de mail
             print('El correo electrónico ingresado no es válido.')
             return 0
-    for key, valor in usuario.items():  # Buscar el usuario por nombre de usuario o correo electrónico
-        if key == ingreso or ('mail' in valor and valor['mail'] == ingreso):  # Verificar si mail existe
+    for key, valor in usuario.items():  # buscar el usuario por nombre de usuario o correo electrónico
+        if key == ingreso or ('mail' in valor and valor['mail'] == ingreso):  # verifica si existe
             if valor['contrasena'] == contrasena:
                 print('Login exitoso')
                 return 1
