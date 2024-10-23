@@ -1,6 +1,5 @@
 from random import *
 from .Login import *
-
 def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias):
     flag = 1
     while flag == 1:
