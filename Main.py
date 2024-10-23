@@ -9,9 +9,9 @@ def main():
                 }
         }
     numAlumnos = random.randint(1,30)
-    dicc_alumnos = creardicc_alumnos(numAlumnos)
-    dicc_materias = creardicc_materias()
-    matriz_combinada , arch = combinado(dicc_alumnos, dicc_materias)
+    dicc_alumnos, ArchivoAlumno = creardicc_alumnos(numAlumnos)
+    dicc_materias, ArchivoMateria = creardicc_materias()
+    matriz_combinada , ArchivoMatriz = combinado(dicc_alumnos, dicc_materias)
     opcionlog = 0
     while opcionlog != 3:
         try:
@@ -62,6 +62,7 @@ def main():
                                         dicc_materias = agregar_nueva_materia(dicc_materias)
                                     elif aux == 2:
                                         dicc_materias, matriz_combinada = eliminar_materia(dicc_materias, matriz_combinada)
+                                        
                                     elif aux == 3:
                                         tablaMateria(dicc_materias)
                                     elif aux == 4:
