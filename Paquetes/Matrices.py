@@ -1,45 +1,31 @@
 import random
 import json
 
-def creardicc_alumnos(x):
+def creardicc_alumnos(archivo, modo):
     diccalumnos = {}
-    while x >= 1:
-        legajo = random.randint(111111111, 999999999)
-        nombre = random.choice(['Lucas', 'Maximo', 'Franco', 'Felipe', 'Noah', 'Juan', 'Guillermo', 'Pablo', 'Agustin'])
-        apellido = random.choice(['Ghiglione', 'Bramuglia', 'Collura', 'Remonteo', 'Gomez', 'Huchan', 'Fernandez', 'Gonzalez', 'Perez', 'Garcia'])
-        mail = ''.join([nombre[0].lower(), apellido.lower(), '@gmail.com'])
-        dia= random.randint(1,31) #elije un dia posible
-        mes= random.randint(1,12) #meses posibles
-        anio= random.randint(1960, 2007)
-        fecha_nacimiento = '{:02d}/{:02d}/{}'.format(dia,mes,anio)
-        diccalumnos[legajo] = [nombre, apellido, mail, fecha_nacimiento]
-        x -= 1
     try:
-        with open('ArchivoAlummos.json', 'w', encoding= 'UTF-8') as archivo:
-            json.dump(diccalumnos, archivo, ensure_ascii=False, indent = 2)   #el ensure es para que respete el utf-8   
+        with open(archivo, modo, encoding= 'UTF-8') as ArchivoAlumnos:
+            diccalumnos = json.load(ArchivoAlumnos)
+    except FileNotFoundError:
+        print('No se encontro el archivo.')
     except:
-        print('No se puede abrir el archivo')
+        print('Ocurrio un error.')
+    finally:
+        return diccalumnos, ArchivoAlumnos
 
-    return diccalumnos, archivo
 
 
-
-def creardicc_materias():
-    dicc_materias = {
-        3180: 'Programación I',
-        91218: 'Fundamentos de Química',
-        31784: 'Sistemas de Representación',          #le puse codigo manualmente, mas facil
-        31283: 'Matemática Discreta',
-        553123: 'Álgebra',
-        11163: 'Arquitectura de Computadores'
-    }
+def creardicc_materias(archivo, modo):
+    dicc_materias = {}
     try:
-        with open('ArchivoMaterias.json', 'w', encoding= 'UTF-8') as archivo:
-            json.dump(dicc_materias, archivo, ensure_ascii=False, indent = 2)   
+        with open(archivo, modo, encoding= 'UTF-8') as ArchivoMateria:
+            dicc_materias= json.load(ArchivoMateria)   
+    except FileNotFoundError:
+        print('No se encontro el archivo.')
     except:
-        print('No se puede abrir el archivo')
-    
-    return dicc_materias, archivo
+        print('Ocurrio un error.')
+    finally:
+        return dicc_materias, ArchivoMateria
  
         
 def EscribirArchivo(matriz_combinada):
