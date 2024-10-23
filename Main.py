@@ -9,8 +9,8 @@ def main():
                 }
         }
     numAlumnos = random.randint(1,30)
-    dicc_alumnos, ArchivoAlumno = creardicc_alumnos(numAlumnos)
-    dicc_materias, ArchivoMateria = creardicc_materias()
+    dicc_alumnos, ArchivoAlumno = creardicc_alumnos('ArchivoAlumnos.json', 'r')
+    dicc_materias, ArchivoMateria = creardicc_materias('ArchivoMaterias.json', 'r')
     matriz_combinada , ArchivoMatriz = combinado(dicc_alumnos, dicc_materias)
     opcionlog = 0
     while opcionlog != 3:
