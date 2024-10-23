@@ -1,4 +1,5 @@
 import random
+import json
 
 def creardicc_alumnos(x):
     diccalumnos = {}
@@ -13,7 +14,13 @@ def creardicc_alumnos(x):
         fecha_nacimiento = '{:02d}/{:02d}/{}'.format(dia,mes,anio)
         diccalumnos[legajo] = [nombre, apellido, mail, fecha_nacimiento]
         x -= 1
-    return diccalumnos
+    try:
+        with open('ArchivoAlummos.json', 'w', encoding= 'UTF-8') as archivo:
+            json.dump(diccalumnos, archivo, indent = 2)   
+    except:
+        print('No se puede abrir el archivo')
+
+    return diccalumnos, archivo
 
 #funciona
 
@@ -26,15 +33,20 @@ def creardicc_materias():
         553123: 'Álgebra',
         11163: 'Arquitectura de Computadores'
     }
-
-    return dicc_materias
-#ahí lo cambie según el profesor    
+    try:
+        with open('ArchivoAlummos.json', 'w', encoding= 'UTF-8') as archivo:
+            json.dump(dicc_materias, archivo, indent = 2)   
+    except:
+        print('No se puede abrir el archivo')
+    
+    return dicc_materias, archivo
+ 
         
 def EscribirArchivo(matriz_combinada):
     try:
-        arch= open('Archivo.txt', 'w', encoding= 'UTF-8')
-        lineas = [f'{fila[0]};{fila[1]};{fila[2]};{fila[3]};{fila[4]};\n' for fila in matriz_combinada]
-        arch.writelines(lineas)
+        with open('ArchivoMatriz.txt', 'w', encoding= 'UTF-8') as arch:
+            lineas = [f'{fila[0]};{fila[1]};{fila[2]};{fila[3]};{fila[4]};\n' for fila in matriz_combinada]
+            arch.writelines(lineas)
         
         print('Carga de datos finalizada')
     except OSError:
@@ -42,8 +54,7 @@ def EscribirArchivo(matriz_combinada):
     except ValueError:
         print('No se pudo convertir el tipo de dato del legajo')
     finally:
-        arch.close()
-    return arch
+        return arch
 
 
 
