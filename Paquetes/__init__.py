@@ -15,10 +15,10 @@ __all__ = [
     'registro', 'inicio',
     
     #funciones de matrices
-    'creardicc_alumnos', 'creardicc_materias', 'combinado', 'EscribirArchivo',
+    'creardicc_alumnos', 'creardicc_materias', 'combinado', 'EscribirArchivo', 'EscribirAlumnos',
     
     #funciones del diseño
-    'menuA', 'menuT', 'menuN' , 'menuM' , 'tabla', 'tablaMateria', 'menuP', 
+    'menuA', 'menuT', 'menuN' , 'menuM' , 'tabla', 'tablaMateria', 'menuP', 'escribo',
 
     #Funcion aritmetrica
     'Promedio', 'Promedio_todas_Materias',
