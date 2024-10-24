@@ -1,6 +1,16 @@
 from random import *
 from .Login import *
-def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias):
+import json
+
+def ActualizarArchivoAlumno (dicc_alumnos, archivo):
+    with open('ArchivoAlumnos.json', 'w', encoding= 'UTF-8') as archivo :
+        json.dump(dicc_alumnos, archivo, ensure_ascii= False)
+
+def ActualizarArchivoMaterias (dicc_materias, archivo):
+    with open('ArchivoMaterias.json', 'w', encoding = 'UTF-8') as archivo:
+        json.dump(dicc_materias, archivo, ensure_ascii= False)
+        
+def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias, archivo):
     flag = 1
     while flag == 1:
         cad = input('Ingrese el legajo: ')
@@ -17,7 +27,7 @@ def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias):
     aux= 0
     while aux == 0:
         fecha_nacimiento = input('Ingrese tu fecha de nacimiento en formato (DD/MM/YYYY): ')
-        if not validar_fecha_nacimiento(fecha_nacimiento):
+        if validar_fecha_nacimiento(fecha_nacimiento) == False:
             print('Fecha de nacimiento invalida. Porfavor revise como la introdujo')
         else:
             aux = 1
@@ -25,7 +35,7 @@ def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias):
     aux2=0
     while aux2 == 0:
         mail= input('Ingrese tu mail: ')
-        if not validar_mail(mail):
+        if validar_mail(mail) == False:
             print('Mail invalido, Porfavor revise.')
         else:
             aux2 = 1
@@ -70,6 +80,9 @@ def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias):
         matriz_combinada.append(nuevo_ingreso)
 
     print(f'Nuevo alumno con legajo {legajo} fue agregado.')
+    
+    ActualizarArchivoAlumno(dicc_alumnos, 'ArchivoAlumnos.json')
+
     return dicc_alumnos, matriz_combinada
 
 
@@ -88,6 +101,8 @@ def eliminar_alumno(dicc_alumnos, matriz_combinada):
             print('filas elimindas correctamente de la matriz.')
     else:
         print('El legajo ingresado no existe.')
+
+    ActualizarArchivoAlumno(dicc_alumnos, 'ArchivoAlumnos.json')
     
     return dicc_alumnos , matriz_combinada
 
@@ -116,7 +131,7 @@ def actualizar_alumno(dicc_alumnos):
             aux= 0
             while aux == 0:
                 fecha_nacimiento = input('Ingrese tu fecha de nacimiento en formato (DD/MM/YYYY): ')
-                if not validar_fecha_nacimiento(fecha_nacimiento):
+                if validar_fecha_nacimiento(fecha_nacimiento) == False:
                     print('Fecha de nacimiento invalida. Porfavor revise como la introdujo')
                 else:
                     aux = 1
@@ -124,7 +139,7 @@ def actualizar_alumno(dicc_alumnos):
             aux2=0
             while aux2 == 0:
                 mail= input('Ingrese tu mail: ')
-                if not validar_mail(mail):
+                if validar_mail(mail) == False:
                     print('Mail invalido, Porfavor revise.')
                 else:
                     aux2 = 1
@@ -132,6 +147,9 @@ def actualizar_alumno(dicc_alumnos):
             if nuevo_apellido and nuevo_nombre:
                 dicc_alumnos[legajo] = [nuevo_nombre, nuevo_apellido, mail, fecha_nacimiento]
                 print('Datos Actualizados.')
+
+                ActualizarArchivoAlumno(dicc_alumnos, 'ArchivoAlumnos.json')
+
                 return dicc_alumnos
             
     print('No se ha encontrado el alumno a actualizar')
@@ -249,9 +267,9 @@ def actualizar_nota(matriz_combinada, dicc_alumnos):
     print("El legajo no existe y/o el codigo de la materia no coincide")
     return matriz_combinada
 
-def agregar_nueva_materia(dicc_materias):
+def agregar_nueva_materia(dicc_materias, Archivo):
     flag = 0
-    nuevo_codigo = int(input('Ingrese el codigo de la nueva materia: '))
+    nuevo_codigo = input('Ingrese el codigo de la nueva materia: ')
     for mat in dicc_materias.keys():
         if mat == nuevo_codigo:
             print('El codigo ya existe')
@@ -259,12 +277,16 @@ def agregar_nueva_materia(dicc_materias):
     if flag == 0:
         nuevo_nombre = input('Ingrese el nombre de la materia: ').strip().capitalize()
         dicc_materias[nuevo_codigo] = nuevo_nombre
-        return dicc_materias
+
+    ActualizarArchivoMaterias (dicc_materias, 'ArchivoMaterias.json')
+
+    print('Materia añadida correctamente.')
+    return dicc_materias
 
 
 
 def eliminar_materia(dicc_materias, matriz_combinada, archivo):
-    codigo = int(input('Ingrese el codigo de la materia a eliminar: '))
+    codigo = input('Ingrese el codigo de la materia a eliminar: ').strip()
     if codigo in dicc_materias :
         dicc_materias.pop(codigo)
         print(f'La materia con codigo {codigo} ha sido eliminada.')
@@ -278,8 +300,11 @@ def eliminar_materia(dicc_materias, matriz_combinada, archivo):
         print('filas elimindas correctamente de la matriz.')
     else:
         print('El codigo ingresado no existe.')
-    
+
+    ActualizarArchivoMaterias (dicc_materias, 'ArchivoMaterias.json')
+
     return dicc_materias , matriz_combinada
+
 
 
 def asignarmateria(matriz_combinada, dicc_alumnos, dicc_materias):
