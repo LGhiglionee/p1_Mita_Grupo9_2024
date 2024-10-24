@@ -39,13 +39,13 @@ def main():
                                 aux = int(input('Ingrese la acción que desee, indicando su número: '))
                                 if aux != 6:
                                     if aux == 1:
-                                        dicc_alumnos, matriz_combinada = agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias)
+                                        dicc_alumnos, matriz_combinada = agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias, 'ArchivoAlumnos.json')
                                     elif aux == 2:
                                         leer_alumno(dicc_alumnos)
                                     elif aux == 3:
-                                        dicc_alumnos= actualizar_alumno(dicc_alumnos)
+                                        dicc_alumnos= actualizar_alumno(dicc_alumnos, 'ArchivoAlumnos.json')
                                     elif aux == 4:
-                                        dicc_alumnos, matriz_combinada = eliminar_alumno(dicc_alumnos, matriz_combinada, ArchivoAlumno)
+                                        dicc_alumnos, matriz_combinada = eliminar_alumno(dicc_alumnos, matriz_combinada, ArchivoAlumno, 'ArchivoAlumnos.json')
                                     elif aux== 5:
                                         matriz_combinada = asignarmateria(matriz_combinada, dicc_alumnos, dicc_materias)
                                     elif aux == 6:
@@ -59,16 +59,15 @@ def main():
                                 aux = int(input('Ingrese la acción que desee, indicando su número: '))
                                 if aux != 4:
                                     if aux == 1:
-                                        dicc_materias = agregar_nueva_materia(dicc_materias)
+                                        dicc_materias = agregar_nueva_materia(dicc_materias, 'ArchivoMaterias.json')
                                     elif aux == 2:
-                                        dicc_materias, matriz_combinada = eliminar_materia(dicc_materias, matriz_combinada)
-                                        
+                                        dicc_materias, matriz_combinada = eliminar_materia(dicc_materias, matriz_combinada, 'ArchivoMaterias.json')
                                     elif aux == 3:
                                         tablaMateria(dicc_materias)
                                     elif aux == 4:
                                         print('Saliendo...')
                                     else:
-                                        print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 4')
+                                       print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 4')
                             elif opcion == 3:
                                 menuN()
                                 print()
