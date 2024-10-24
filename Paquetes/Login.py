@@ -3,11 +3,17 @@ import re
 def validar_mail(mail):
     # patron para validar un correo electrónico
     patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-    return re.match(patron, mail) is not None
+    if re.match(patron, mail):
+        return True
+    else:
+        return False
 
 def validar_fecha_nacimiento(fecha_nacimiento):
     patron= r'^\d{2}/\d{2}/\d{4}$'
-    return re.match(patron, fecha_nacimiento) is not None
+    if re.match(patron, fecha_nacimiento):
+        return True
+    else:
+        return False
 
 def registro(usuario):#registro de usuarios
     flag = 0
@@ -15,7 +21,7 @@ def registro(usuario):#registro de usuarios
         nombre_usuario = input('Ingrese su nuevo usuario: ').strip().lower()
         contrasena = input('Ingrese su nueva contrasena: ').strip()
         mail= input('Ingrese su correo electronico: ').strip().lower()
-        if  not validar_mail(mail):
+        if validar_mail(mail) == False:
             print('Correo invalido')
             flag=0
         
@@ -36,7 +42,7 @@ def inicio (usuario):#verificacion de usuario
     ingreso = input('Ingrese su nombre de usuario o correo electrónico: ').strip().lower()
     contrasena = input('Ingrese su contraseña: ').strip()
     if "@" in ingreso and "." in ingreso: # si el ingreso contiene un "@" y un "."
-        if not validar_mail(ingreso): #verifica que siga el patron de mail
+        if validar_mail(ingreso) == False: #verifica que siga el patron de mail
             print('El correo electrónico ingresado no es válido.')
             return 0
     for key, valor in usuario.items():  # buscar el usuario por nombre de usuario o correo electrónico
