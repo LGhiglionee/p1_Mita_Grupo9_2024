@@ -44,7 +44,6 @@ def Promedio(matriz_combinada, dicc_alumnos, dicc_materias): #Lo que tengo pensa
         print(f'Hubo un problema, faltan notas de parciales')
     except TypeError:
         print('Hubo un problema. Hay alguna/s instancia/s que no tiene nota cargada correctamente.')
-        print(type(promedio))
 
 def Promedio_todas_Materias(matriz_combinada, dicc_alumnos):
     promedio_materias= []
