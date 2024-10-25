@@ -11,7 +11,13 @@ def validar_mail(mail):
 def validar_fecha_nacimiento(fecha_nacimiento):
     patron= r'^\d{2}/\d{2}/\d{4}$'
     if re.match(patron, fecha_nacimiento):
-        return True
+        dia , mes, ano = fecha_nacimiento.split('/')
+        day = int(dia)
+        month = int(mes)
+        if day <= 31 and month<=12:
+            return True
+        else:
+            return False
     else:
         return False
 
