@@ -5,70 +5,48 @@ def creardicc_alumnos(archivo, modo):
     diccalumnos = {}
     try:
         with open(archivo, modo, encoding= 'UTF-8') as ArchivoAlumnos:
-            diccalumnos = json.load(ArchivoAlumnos)
+            diccalumnos_string = json.load(ArchivoAlumnos)
+            for legajo , info in diccalumnos_string.items():
+                leg = int(legajo)
+                diccalumnos[leg] = info
     except FileNotFoundError:
         print('No se encontro el archivo.')
     except:
         print('Ocurrio un error.')
     finally:
-        return diccalumnos, ArchivoAlumnos
-
+        return diccalumnos
 
 
 def creardicc_materias(archivo, modo):
     dicc_materias = {}
     try:
         with open(archivo, modo, encoding= 'UTF-8') as ArchivoMateria:
-            dicc_materias= json.load(ArchivoMateria)   
+            dicc_materias_string= json.load(ArchivoMateria)
+            for codigo , info in dicc_materias_string.items():
+                cod = int(codigo)
+                dicc_materias[cod] = info
     except FileNotFoundError:
         print('No se encontro el archivo.')
     except:
         print('Ocurrio un error.')
-    finally:
-        return dicc_materias, ArchivoMateria
+    return dicc_materias
  
-        
-def EscribirArchivo(matriz_combinada):
-    try:
-        with open('ArchivoMatriz.txt', 'w', encoding= 'UTF-8') as arch:
-            lineas = [f'{fila[0]};{fila[1]};{fila[2]};{fila[3]};{fila[4]};\n' for fila in matriz_combinada]
-            arch.writelines(lineas)
-        
-        print('Carga de datos finalizada')
-    except OSError:
-        print('No se pudo crear el archivo')
-    except ValueError:
-        print('No se pudo convertir el tipo de dato del legajo')
-    finally:
-        return arch
-
-
-
-def combinado(diccalumnos, dicc_materias):
-
-    min_materias, max_materias = 0 , 5
-    matriz_combinada = []
-    matriz_combinada.append(['Legajo', 'Código Materia', 'Parcial 1', 'Parcial 2', 'Final'])
-    for legajo in diccalumnos.keys():
-        num_materias = random.randint(min_materias, max_materias)  # pone un numero aleatorio para no todos los alumnos esten en todas las materias
-        materias_asignadas = []
-        materias_disponibles = list(dicc_materias.keys()) #crea una lista con todos los codigos
-        while len(materias_asignadas) < num_materias and materias_disponibles:
-            codigo = random.choice(materias_disponibles)
-            materias_asignadas.append(codigo)  # pone materia a alumno
-            materias_disponibles.remove(codigo)  # la saca de la otra lsta, para que no hayan repetidas
-        for codigo in materias_asignadas:
-            parcial1 = random.randint(1,10)
-            parcial2 = random.randint(1,10)
-            if parcial1 >= 8 and parcial2 >=8:
-                final= 'Promocion'
-            elif parcial1 <4 and parcial2<4:
-                final= 'Recursa'
-            elif parcial1 < 4 or parcial2 < 4:
-                final= 'Debe recuperatorio'
+def crearmatriz (archivo, modo):
+    matriz_combinada= []
+    with open(archivo, modo, encoding='UTF-8') as arch:
+        encabezado= arch.readline().strip().split(';')
+        matriz_combinada.append(encabezado)
+        linea = arch.readline().strip()
+        while linea:
+            legajo, codigo, parcial1 , parcial2 , final = linea.split(';')
+            legajo = int(legajo)  #Paso todo a entero
+            codigo = int(codigo)
+            parcial1 = int(parcial1) if parcial1 != '-' else '-'
+            parcial2 = int(parcial2) if parcial2 != '-' else '-'
+            if final not in ['-', 'Debe recuperatorio', 'Promoción', 'Recursa', 'Promocion']:
+                final = int(final)
             else:
-                final= random.randint(1,10)
-            matriz_combinada.append([legajo, codigo, parcial1, parcial2, final]) #hace la linea de la matriz
-    arch= EscribirArchivo(matriz_combinada)
-
-    return matriz_combinada, arch
+                final = final              
+            matriz_combinada.append([legajo, codigo, parcial1, parcial2, final])
+            linea = arch.readline().strip()
+    return matriz_combinada
