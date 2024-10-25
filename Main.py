@@ -8,10 +8,9 @@ def main():
             'mail' : 'root@gmail.com'
                 }
         }
-    numAlumnos = random.randint(1,30)
-    dicc_alumnos, ArchivoAlumno = creardicc_alumnos('ArchivoAlumnos.json', 'r')
-    dicc_materias, ArchivoMateria = creardicc_materias('ArchivoMaterias.json', 'r')
-    matriz_combinada , ArchivoMatriz = combinado(dicc_alumnos, dicc_materias)
+    dicc_alumnos = creardicc_alumnos('ArchivoAlumnos.json', 'r')
+    dicc_materias = creardicc_materias('ArchivoMaterias.json', 'r')
+    matriz_combinada = crearmatriz('ArchivoMatriz.txt', 'rt')
     opcionlog = 0
     while opcionlog != 3:
         try:
@@ -45,7 +44,7 @@ def main():
                                     elif aux == 3:
                                         dicc_alumnos= actualizar_alumno(dicc_alumnos, 'ArchivoAlumnos.json')
                                     elif aux == 4:
-                                        dicc_alumnos, matriz_combinada = eliminar_alumno(dicc_alumnos, matriz_combinada, ArchivoAlumno, 'ArchivoAlumnos.json')
+                                        dicc_alumnos, matriz_combinada = eliminar_alumno(dicc_alumnos, matriz_combinada, 'ArchivoAlumnos.json')
                                     elif aux== 5:
                                         matriz_combinada = asignarmateria(matriz_combinada, dicc_alumnos, dicc_materias)
                                     elif aux == 6:
