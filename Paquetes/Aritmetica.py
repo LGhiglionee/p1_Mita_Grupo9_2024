@@ -15,15 +15,17 @@ def Promedio(matriz_combinada, dicc_alumnos, dicc_materias): #Lo que tengo pensa
                 
                 if parcial1 == '-' or parcial2 == '-':
                     raise ValueError
-                if final == 'Promoción':
+                if final == 'Promocion':
                     promedio = calculo(parcial1, parcial2)
                 elif final == 'Recursa':
                     promedio = calculo(parcial1, parcial2)
-                elif final != '-':
+                elif final == 'Debe recuperatorio':
+                    promedio= calculo(parcial1, parcial2)
+                elif final == '-':
+                    promedio = calculo(parcial1, parcial2)
+                else:
                     promedio_par = calculo_par(parcial1, parcial2)
                     promedio = calculo(promedio_par, final)
-                else:
-                    promedio = calculo(parcial1, parcial2)
                 print(f'El promedio del alumno {dicc_alumnos[legajo][0]} {dicc_alumnos[legajo][1]} '
                       f'en la materia {dicc_materias[codigo_materia]} es {promedio}')
                 
@@ -64,6 +66,13 @@ def Promedio_todas_Materias(matriz_combinada, dicc_alumnos):
                     promedio = (parcial1 + parcial2) / 2
                 elif final == 'Recursa':
                     promedio = (parcial1 + parcial2) / 2
+                elif final == 'Debe recuperatorio':
+                    if parcial1>=4:
+                        promedio= (parcial1 + parcial2)/2
+                        print('El alumno tiene el segundo parcial desaprobado.')
+                    else:
+                        promedio= (parcial1 + parcial2)/2
+                        print('El alumno tiene el primer parcial desaprobado')
                 elif final != '-':
                     promediopar = (parcial1 + parcial2)/2
                     promedio = (promediopar + final)/2

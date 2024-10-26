@@ -40,7 +40,7 @@ def crearmatriz (archivo, modo):
         while linea:
             legajo, codigo, parcial1 , parcial2 , final = linea.split(';')
             legajo = int(legajo)  #Paso todo a entero
-            codigo = int(codigo)
+            codigo= int(codigo) if codigo!='-' else '-'
             parcial1 = int(parcial1) if parcial1 != '-' else '-'
             parcial2 = int(parcial2) if parcial2 != '-' else '-'
             if final not in ['-', 'Debe recuperatorio', 'Promoción', 'Recursa', 'Promocion']:
