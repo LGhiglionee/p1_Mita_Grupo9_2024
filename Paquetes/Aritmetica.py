@@ -47,44 +47,44 @@ def Promedio(matriz_combinada, dicc_alumnos, dicc_materias): #Lo que tengo pensa
     except TypeError:
         print('Hubo un problema. Hay alguna/s instancia/s que no tiene nota cargada correctamente.')
 
-def Promedio_todas_Materias(matriz_combinada, dicc_alumnos):
-    promedio_materias= []
+def validarlegajo(dicc_alumnos):
+    aux= 0
+    while aux == 0:
+        legajo = int(input('Ingrese el legajo del alumno que deseas saber su promedio: '))
+        if legajo in dicc_alumnos:
+            return legajo
+        else:
+            print('No se encontro al alumno')
+
+def Promedio_recursivo (matriz_combinada, promediomat, legajo, i=0):
+    suma, cantnotas = 0,0
+
+    if i == len(matriz_combinada): #cuando llega a la cantidad de notas para
+        return promediomat
+    
+    if matriz_combinada[i][0] == legajo:
+        if matriz_combinada[i][2] != '-' and matriz_combinada[i][3] != '-': # i2 es parcial 1 y i3 es parcial 2 (ubis)
+            promediopar = (matriz_combinada[i][2] + matriz_combinada[i][3])/2
+            suma += promediopar
+            cantnotas += 1
+
+            if matriz_combinada[i][4] not in ['-', 'Debe recuperatorio', 'Promocion', 'Recursa']: #i4 es final
+                suma += matriz_combinada[i][4]
+                cantnotas += 1
+
+        if cantnotas >0:
+            promediomat.append(suma/cantnotas)
+    
+    return Promedio_recursivo(matriz_combinada, promediomat, legajo, i + 1)
+
+def Promediogen(promediomateria):
     try:
-        legajo= int(input('Ingrese el legajo del alumno: '))
-        promedio = 0
-        if legajo not in dicc_alumnos:
-            raise ValueError('El legajo ingresado no pertenece a ningun alumno')
-        for fila in matriz_combinada:
-            if legajo == fila[0]:
-                parcial1 = fila[2]
-                parcial2 = fila[3]
-                final = fila[4]
-
-                assert parcial1 != '-', 'Falta la nota del primer parcial'
-                assert parcial2 != '-', 'Falta la nota del segundo parcial'
-                if final == 'Promoción':
-                    promedio = (parcial1 + parcial2) / 2
-                elif final == 'Recursa':
-                    promedio = (parcial1 + parcial2) / 2
-                elif final == 'Debe recuperatorio':
-                    if parcial1>=4:
-                        promedio= (parcial1 + parcial2)/2
-                        print('El alumno tiene el segundo parcial desaprobado.')
-                    else:
-                        promedio= (parcial1 + parcial2)/2
-                        print('El alumno tiene el primer parcial desaprobado')
-                elif final != '-':
-                    promediopar = (parcial1 + parcial2)/2
-                    promedio = (promediopar + final)/2
-                else:
-                    promedio = (parcial1 + parcial2) / 2
-                promedio_materias.append(promedio)
-
-        promedio_total= sum(promedio_materias)/len(promedio_materias)
-        print(f'El promedio del alumno {dicc_alumnos[legajo][0]} {dicc_alumnos[legajo][1]} es {promedio_total}')
-    except TypeError:
-        print('Ha habido un problema. Hay alguna/s instancia/s que no tiene nota cargada')
-    except AssertionError as msj:
-        print(f'Ha ocurrido un error. {msj}')
-    except ValueError as nopertenece:
-        print(f'{nopertenece}')
+        suma=0
+        for i in promediomateria:
+            suma += i
+        promedio = suma/len(promediomateria)
+        return promedio
+    except ZeroDivisionError:
+        print('Hubo un problema. No hay promedios')
+        return 0
+    
