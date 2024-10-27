@@ -300,7 +300,7 @@ def agregar_nueva_materia(dicc_materias, Archivo):
 
 
 
-def eliminar_materia(dicc_materias, matriz_combinada, archivo):
+def eliminar_materia(dicc_materias, matriz_combinada):
     codigo = int(input('Ingrese el codigo de la materia a eliminar: '))
     if codigo in dicc_materias :
         dicc_materias.pop(codigo)
