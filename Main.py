@@ -99,7 +99,11 @@ def main():
                                     if aux == 1:
                                         Promedio(matriz_combinada, dicc_alumnos, dicc_materias)
                                     elif aux == 2:
-                                        Promedio_todas_Materias(matriz_combinada, dicc_alumnos)
+                                        legajo = validarlegajo(dicc_alumnos)
+                                        promediomat= []
+                                        promediomat = Promedio_recursivo(matriz_combinada, promediomat, legajo, i= 0)
+                                        promedio = Promediogen(promediomat)
+                                        print(f'El promedio del alumno {dicc_alumnos[legajo][0]} {dicc_alumnos[legajo][1]} es {promedio}')
                                     elif aux == 3:
                                         print('saliendo...')
                                     else:
