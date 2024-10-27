@@ -21,7 +21,7 @@ __all__ = [
     'menuA', 'menuT', 'menuN' , 'menuM' , 'tabla', 'tablaMateria', 'menuP',
 
     #Funcion aritmetrica
-    'Promedio', 'Promedio_todas_Materias',
+    'Promedio', 'Promedio_recursivo', 'validarlegajo', 'Promediogen'
     
   
     ]
