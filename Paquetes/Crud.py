@@ -10,20 +10,32 @@ def ActualizarArchivoMaterias (dicc_materias, archivo):
     with open('ArchivoMaterias.json', 'w', encoding = 'UTF-8') as archivo:
         json.dump(dicc_materias, archivo, ensure_ascii= False)
         
+def EscribirArchivo(matriz_combinada):
+    try:
+        with open('ArchivoMatriz.txt', 'w', encoding= 'UTF-8') as arch:
+            lineas = [f'{fila[0]};{fila[1]};{fila[2]};{fila[3]};{fila[4]}\n' for fila in matriz_combinada]
+            arch.writelines(lineas)
+        
+        print('Carga de datos finalizada')
+    except OSError:
+        print('No se pudo crear el archivo')
+    except ValueError:
+        print('No se pudo convertir el tipo de dato del legajo')
+    finally:
+        return arch
+    
+
 def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias, archivo):
     flag = 1
     while flag == 1:
-        cad = input('Ingrese el legajo: ')
-        if not cad.isdigit():
+        leg = input('Ingrese el legajo: ')
+        if not leg.isdigit():
             print('El legajo debe ser un número.')
         else:
-            legajo = str(cad.zfill(9))  # llena de 0 el legajo
             flag = 0
-
-    legajo= int(legajo)
     nombre = input('Ingrese el nombre: ').title()
     apellido = input('Ingrese el apellido: ').title()
-
+    legajo = int(leg)
     aux= 0
     while aux == 0:
         fecha_nacimiento = input('Ingrese tu fecha de nacimiento en formato (DD/MM/YYYY): ')
@@ -65,6 +77,7 @@ def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias, archivo):
                 matriz_combinada.append(nuevo_ingreso)  # pone el nuevo alumno en la matriz combinada
                 aux = 0
                 print(f'Materia {materia} asignada correctamente.')
+                EscribirArchivo(matriz_combinada)
                 return dicc_alumnos, matriz_combinada
             else:
                 print('No se encontró el código, intente nuevamente.')
@@ -72,7 +85,7 @@ def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias, archivo):
     else: #si pone que no, no asigna materia
         nuevo_ingreso = [
             legajo,
-            '',  # sin materia
+            '-',  # sin materia
             '-',  # parcial 1
             '-',  # parcial 2
             '-'   # final
@@ -81,12 +94,13 @@ def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias, archivo):
 
     print(f'Nuevo alumno con legajo {legajo} fue agregado.')
     
+    EscribirArchivo(matriz_combinada)
     ActualizarArchivoAlumno(dicc_alumnos, 'ArchivoAlumnos.json')
 
     return dicc_alumnos, matriz_combinada
 
 
-def eliminar_alumno(dicc_alumnos, matriz_combinada):
+def eliminar_alumno(dicc_alumnos, matriz_combinada, archivo):
     legajo = int(input('Ingrese el legajo del alumno a eliminar: '))
     if legajo in dicc_alumnos :
         dicc_alumnos.pop(legajo)
@@ -103,6 +117,7 @@ def eliminar_alumno(dicc_alumnos, matriz_combinada):
         print('El legajo ingresado no existe.')
 
     ActualizarArchivoAlumno(dicc_alumnos, 'ArchivoAlumnos.json')
+    EscribirArchivo(matriz_combinada)
     
     return dicc_alumnos , matriz_combinada
 
@@ -121,13 +136,13 @@ def leer_alumno(dicc_alumnos):
     return
 
 
-def actualizar_alumno(dicc_alumnos):
+def actualizar_alumno(dicc_alumnos, archivo):
 
     legajo = int(input('Ingrese el legajo del alumno a actualizar: '))
     for alumno in dicc_alumnos.keys():
         if alumno == legajo:
-            nuevo_nombre = input('Ingrese el nuevo nombre: ').title()
-            nuevo_apellido = input('Ingrese el nuevo apellido: ').title()
+            nuevo_nombre = input('Ingrese el nuevo nombre: ').title().strip()
+            nuevo_apellido = input('Ingrese el nuevo apellido: ').title().strip()
             aux= 0
             while aux == 0:
                 fecha_nacimiento = input('Ingrese tu fecha de nacimiento en formato (DD/MM/YYYY): ')
@@ -163,7 +178,6 @@ def agregar_nota(matriz_combinada, dicc_alumnos):
         if int(alumno[0]) == legajo and alumno[1] == codigo_materia: 
             print(f"Alumno: {dicc_alumnos[legajo][0]} {dicc_alumnos[legajo][1]}")
             
-            # Nota del Parcial 1
             parcial1 = input('Ingrese la nota del parcial 1 (1-10 o "-" para no cambiar): ')
             if parcial1 != '-':
                 if parcial1.isdigit() and 1 <= int(parcial1) <= 10:
@@ -172,7 +186,6 @@ def agregar_nota(matriz_combinada, dicc_alumnos):
                     print('Nota errónea. Debe ser un número entre 1 y 10.')
                     return matriz_combinada
 
-            # Nota del Parcial 2
             parcial2 = input('Ingrese la nota del parcial 2 (1-10 o "-" para no cambiar): ')
             if parcial2 != '-':
                 if parcial2.isdigit() and 1 <= int(parcial2) <= 10:
@@ -185,7 +198,7 @@ def agregar_nota(matriz_combinada, dicc_alumnos):
             parcialdos = alumno[3] if alumno[3] != '-' else 0
 
             if parcialuno >= 8 and parcialdos >= 8: #se fija si promociona o recursa
-                alumno[4] = 'Promoción'
+                alumno[4] = 'Promocion'
             elif parcialuno < 4 and parcialdos < 4:
                 alumno[4] = 'Recursa'
             else:
@@ -198,6 +211,7 @@ def agregar_nota(matriz_combinada, dicc_alumnos):
                         return matriz_combinada
 
             print('Las notas han sido cargadas correctamente')
+            EscribirArchivo(matriz_combinada)
             return matriz_combinada
     
     print('No se ha encontrado el alumno con el legajo ingresado y/o el codigo de materia no coincide')
@@ -247,7 +261,7 @@ def actualizar_nota(matriz_combinada, dicc_alumnos):
 
             if fila[2] != '-' and fila[3] != '-':
                 if fila[2] >= 8 and fila[3] >= 8:
-                    fila[4] = 'Promoción'
+                    fila[4] = 'Promocion'
                 elif fila[2] < 4 and fila[3] < 4:
                     fila[4] = 'Recursa'
                 elif fila[2] < 4 or fila[3] < 4:
@@ -262,6 +276,7 @@ def actualizar_nota(matriz_combinada, dicc_alumnos):
                             return matriz_combinada
 
             print("Notas actualizadas con éxito")
+            EscribirArchivo(matriz_combinada)
             return matriz_combinada
 
     print("El legajo no existe y/o el codigo de la materia no coincide")
@@ -269,7 +284,7 @@ def actualizar_nota(matriz_combinada, dicc_alumnos):
 
 def agregar_nueva_materia(dicc_materias, Archivo):
     flag = 0
-    nuevo_codigo = input('Ingrese el codigo de la nueva materia: ')
+    nuevo_codigo = int(input('Ingrese el codigo de la nueva materia: '))
     for mat in dicc_materias.keys():
         if mat == nuevo_codigo:
             print('El codigo ya existe')
@@ -285,8 +300,8 @@ def agregar_nueva_materia(dicc_materias, Archivo):
 
 
 
-def eliminar_materia(dicc_materias, matriz_combinada, archivo):
-    codigo = input('Ingrese el codigo de la materia a eliminar: ').strip()
+def eliminar_materia(dicc_materias, matriz_combinada):
+    codigo = int(input('Ingrese el codigo de la materia a eliminar: '))
     if codigo in dicc_materias :
         dicc_materias.pop(codigo)
         print(f'La materia con codigo {codigo} ha sido eliminada.')
@@ -312,8 +327,23 @@ def asignarmateria(matriz_combinada, dicc_alumnos, dicc_materias):
     if legajo not in dicc_alumnos:
             print('No se encontro al alumno')
             return
-    codigo_materia= int(input(f'Ingrese el codigo de la materia que le quieras asignarle a {dicc_alumnos[legajo][0]} {dicc_alumnos[legajo][1]}: '))
-    if codigo_materia in dicc_materias:
-        matriz_combinada.append([legajo, codigo_materia, '-', '-','-'])
-        print(f'La materia {dicc_materias[codigo_materia]} fue asignada correctamente al alumno.')
-        return matriz_combinada
+    aux = 0
+    while aux == 0:
+        codigo_materia= int(input(f'Ingrese el codigo de la materia que le quieras asignarle a {dicc_alumnos[legajo][0]} {dicc_alumnos[legajo][1]}: '))
+        if codigo_materia in dicc_materias:
+            for fila in matriz_combinada:
+                if fila[0] == legajo:
+                    fila[1] = codigo_materia
+                    fila[2] = '-'
+                    fila[3] = '-'
+                    fila[4]= '-'
+                    print(f'La materia {dicc_materias[codigo_materia]} fue asignada correctamente al alumno.')
+                    aux = 1
+        else:
+            print('No existe la materia con el codigo brindado. Porfavor ingrese un codigo existente')
+            for codigo, materia in dicc_materias.items():
+                    print(f'Codigo: {codigo}, Materia: {materia}')
+            aux = 0
+    EscribirArchivo(matriz_combinada)
+    return matriz_combinada
+            
