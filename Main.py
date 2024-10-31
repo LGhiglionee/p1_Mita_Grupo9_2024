@@ -1,4 +1,3 @@
-import random
 from Paquetes import *
 def main():
     #usuario root para saltear el paso de crear un usuario.
