@@ -1,4 +1,3 @@
-import random
 import json
 
 def creardicc_alumnos(archivo, modo):
