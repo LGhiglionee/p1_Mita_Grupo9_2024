@@ -29,7 +29,8 @@ def menuN():
 def menuP():
     print('1. Promedio de alumno por materia')
     print('2. Promedio de alumno en todas las materias inscriptas')
-    print('3. Salir')
+    print('3. Informe de aprobacion de materia')
+    print('4. Salir')
     
 def tabla(x):
     # max de cada columna
