@@ -94,7 +94,7 @@ def main():
                                 menuP()
                                 print()
                                 aux= int(input('Ingrese la accion que desee: '))
-                                if aux != 3:
+                                if aux != 4:
                                     if aux == 1:
                                         Promedio(matriz_combinada, dicc_alumnos, dicc_materias)
                                     elif aux == 2:
@@ -104,6 +104,8 @@ def main():
                                         promedio = Promediogen(promediomat)
                                         print(f'El promedio del alumno {dicc_alumnos[legajo][0]} {dicc_alumnos[legajo][1]} es {promedio}')
                                     elif aux == 3:
+                                        ContarAprobados(matriz_combinada, dicc_materias)
+                                    elif aux == 4:
                                         print('saliendo...')
                                     else:
                                         print('Ingrese un numero valido')
