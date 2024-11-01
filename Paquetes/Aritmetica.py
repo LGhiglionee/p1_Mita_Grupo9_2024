@@ -87,4 +87,27 @@ def Promediogen(promediomateria):
     except ZeroDivisionError:
         print('Hubo un problema. No hay promedios')
         return 0
-    
+
+def ContarAprobados (matrizcombinada, dicc_materias):
+    try:
+        codigomat = int(input('Ingrese el codigo de la materia: '))
+        aprobados = set()
+        desaprobados = set()
+        if codigomat in dicc_materias:
+            for i in matrizcombinada [1:]: #evita encabezado
+                final = i[4]
+                if i[1] == codigomat: #codigo materia
+                    if final == int:
+                        if final >= 4:
+                            aprobados.add(i[0]) #legajo
+                    elif final == 'Promocion':
+                        aprobados.add(i[0])
+                    else:
+                        desaprobados.add(i[0])
+            total = aprobados | desaprobados #union (suma de ambos)
+            print(f'La cantidad de alumnos que cursaron la materia: {len(total)}')
+            print(f'Cantidad de aprobados: {len(aprobados)}')
+            print(f'Cantidad de desaprobados: {len(desaprobados)}')
+            print()
+    except ValueError:
+        print('El codigo de la materia debe ser un numero')
