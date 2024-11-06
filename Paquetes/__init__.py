@@ -8,8 +8,7 @@ from .Diseno import *
 __all__ = [
     #funciones de aritmetica y crud
     'agregar_alumno', 'eliminar_alumno', 'leer_alumno', 'actualizar_alumno',
-    'agregar_nota', 'leer_nota', 'actualizar_nota','agregar_nueva_materia', 'eliminar_materia', 'asignarmateria',
-
+    'agregar_nota', 'leer_nota', 'actualizar_nota','agregar_nueva_materia', 'eliminar_materia', 'asignarmateria', 'ActualizarArchivoAlumno', 'ActualizarArchivoMaterias', 'EscribirArchivo',
     
     #funciones de login
     'registro', 'inicio',
