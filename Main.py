@@ -116,15 +116,16 @@ def main():
                         except ValueError:
                                 print('Porfavor debe ingresar un numero, no un caracter.')
                                 print('Volviendo al menu...')
-                elif opcionlog == 3:
-                    ActualizarArchivoAlumno(dicc_alumnos)
-                    ActualizarArchivoMaterias(dicc_materias)
-                    EscribirArchivo(matriz_combinada)
-                    print('Saliendo....')
-                else:
-                    print()
-                    print('Ingreso un valor que no corresponde, repita el proceso')
-                    print()
+            elif opcionlog == 3:
+                print('Actualizando Archivos.. ')
+                ActualizarArchivoAlumno(dicc_alumnos, 'ArchivoAlumnos.json')
+                ActualizarArchivoMaterias(dicc_materias, 'ArchivoMaterias.json')
+                EscribirArchivo(matriz_combinada, 'ArchivoMatriz.txt')
+                print('Archivos Actualizados. Saliendo....')
+            else:
+                print()
+                print('Ingreso un valor que no corresponde, repita el proceso')
+                print()
         except ValueError:
             print('Porfavor, debe ingresar un numero y del rango pedido (1-3), no un caracter')
             print()
