@@ -62,18 +62,18 @@ def Promedio_recursivo (matriz_combinada, promediomat, legajo, i=0):
     if i == len(matriz_combinada): #cuando llega a la cantidad de notas para
         return promediomat
     
-    if matriz_combinada[i][0] == legajo:
+    if matriz_combinada[i][0] == legajo: # i0 es legjo
         if matriz_combinada[i][2] != '-' and matriz_combinada[i][3] != '-': # i2 es parcial 1 y i3 es parcial 2 (ubis)
             promediopar = (matriz_combinada[i][2] + matriz_combinada[i][3])/2
-            suma += promediopar
+            suma += promediopar #asigna en una variable a el resultado de la suma de los dos parciales
             cantnotas += 1
 
             if matriz_combinada[i][4] not in ['-', 'Debe recuperatorio', 'Promocion', 'Recursa']: #i4 es final
-                suma += matriz_combinada[i][4]
+                suma += matriz_combinada[i][4] #si es un entero, a la variable suma le suma el final
                 cantnotas += 1
 
-        if cantnotas >0:
-            promediomat.append(suma/cantnotas)
+        if cantnotas >0: 
+            promediomat.append(suma/cantnotas) #si hay notas, hace suma divido la cantidad y almacena en una lista promediomat
     
     return Promedio_recursivo(matriz_combinada, promediomat, legajo, i + 1)
 
