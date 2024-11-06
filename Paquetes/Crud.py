@@ -2,14 +2,20 @@ from random import *
 from .Login import *
 import json
 
-def ActualizarArchivoAlumno (dicc_alumnos, archivo):
-    with open('ArchivoAlumnos.json', 'w', encoding= 'UTF-8') as archivo :
-        json.dump(dicc_alumnos, archivo, ensure_ascii= False)
+def ActualizarArchivoAlumno (dicc_alumnos): #Agg excepciones
+    try:
+        with open('ArchivoAlumnos.json', 'w', encoding= 'UTF-8') as archivo :
+            json.dump(dicc_alumnos, archivo, ensure_ascii= False)
+    except FileNotFoundError:
+        print('No se encontro el archivo')
 
-def ActualizarArchivoMaterias (dicc_materias, archivo):
-    with open('ArchivoMaterias.json', 'w', encoding = 'UTF-8') as archivo:
-        json.dump(dicc_materias, archivo, ensure_ascii= False)
-        
+def ActualizarArchivoMaterias (dicc_materias):
+    try:
+        with open('ArchivoMaterias.json', 'w', encoding = 'UTF-8') as archivo:
+            json.dump(dicc_materias, archivo, ensure_ascii= False)
+    except FileNotFoundError:
+        print('No se encontro el archivo')
+
 def EscribirArchivo(matriz_combinada):
     try:
         with open('ArchivoMatriz.txt', 'w', encoding= 'UTF-8') as arch:
@@ -25,7 +31,7 @@ def EscribirArchivo(matriz_combinada):
         return arch
     
 
-def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias, archivo):
+def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias):
     flag = 1
     while flag == 1:
         leg = input('Ingrese el legajo: ')
@@ -93,14 +99,11 @@ def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias, archivo):
         matriz_combinada.append(nuevo_ingreso)
 
     print(f'Nuevo alumno con legajo {legajo} fue agregado.')
-    
-    EscribirArchivo(matriz_combinada)
-    ActualizarArchivoAlumno(dicc_alumnos, 'ArchivoAlumnos.json')
 
     return dicc_alumnos, matriz_combinada
 
 
-def eliminar_alumno(dicc_alumnos, matriz_combinada, archivo):
+def eliminar_alumno(dicc_alumnos, matriz_combinada):
     legajo = int(input('Ingrese el legajo del alumno a eliminar: '))
     if legajo in dicc_alumnos :
         dicc_alumnos.pop(legajo)
@@ -111,13 +114,10 @@ def eliminar_alumno(dicc_alumnos, matriz_combinada, archivo):
             if fila[0] == legajo:
                 filas_a_eliminar.append(fila) #junta todas las filas que tenga ese legajo // agregar un re.match ==> patrón = fila ==> ('alumno')
         for fila in filas_a_eliminar:
-            matriz_combinada.remove(fila) #borra
+            matriz_combinada.remove(fila) #borra 
             print('filas elimindas correctamente de la matriz.')
     else:
         print('El legajo ingresado no existe.')
-
-    ActualizarArchivoAlumno(dicc_alumnos, 'ArchivoAlumnos.json')
-    EscribirArchivo(matriz_combinada)
     
     return dicc_alumnos , matriz_combinada
 
@@ -136,7 +136,7 @@ def leer_alumno(dicc_alumnos):
     return
 
 
-def actualizar_alumno(dicc_alumnos, archivo):
+def actualizar_alumno(dicc_alumnos):
 
     legajo = int(input('Ingrese el legajo del alumno a actualizar: '))
     for alumno in dicc_alumnos.keys():
@@ -162,8 +162,6 @@ def actualizar_alumno(dicc_alumnos, archivo):
             if nuevo_apellido and nuevo_nombre:
                 dicc_alumnos[legajo] = [nuevo_nombre, nuevo_apellido, mail, fecha_nacimiento]
                 print('Datos Actualizados.')
-
-                ActualizarArchivoAlumno(dicc_alumnos, 'ArchivoAlumnos.json')
 
                 return dicc_alumnos
             
@@ -211,7 +209,6 @@ def agregar_nota(matriz_combinada, dicc_alumnos):
                         return matriz_combinada
 
             print('Las notas han sido cargadas correctamente')
-            EscribirArchivo(matriz_combinada)
             return matriz_combinada
     
     print('No se ha encontrado el alumno con el legajo ingresado y/o el codigo de materia no coincide')
@@ -276,13 +273,12 @@ def actualizar_nota(matriz_combinada, dicc_alumnos):
                             return matriz_combinada
 
             print("Notas actualizadas con éxito")
-            EscribirArchivo(matriz_combinada)
             return matriz_combinada
 
     print("El legajo no existe y/o el codigo de la materia no coincide")
     return matriz_combinada
 
-def agregar_nueva_materia(dicc_materias, Archivo):
+def agregar_nueva_materia(dicc_materias):
     flag = 0
     nuevo_codigo = int(input('Ingrese el codigo de la nueva materia: '))
     for mat in dicc_materias.keys():
@@ -292,8 +288,6 @@ def agregar_nueva_materia(dicc_materias, Archivo):
     if flag == 0:
         nuevo_nombre = input('Ingrese el nombre de la materia: ').strip().capitalize()
         dicc_materias[nuevo_codigo] = nuevo_nombre
-
-    ActualizarArchivoMaterias (dicc_materias, 'ArchivoMaterias.json')
 
     print('Materia añadida correctamente.')
     return dicc_materias
@@ -315,8 +309,6 @@ def eliminar_materia(dicc_materias, matriz_combinada):
         print('filas elimindas correctamente de la matriz.')
     else:
         print('El codigo ingresado no existe.')
-
-    ActualizarArchivoMaterias (dicc_materias, 'ArchivoMaterias.json')
 
     return dicc_materias , matriz_combinada
 
@@ -344,6 +336,5 @@ def asignarmateria(matriz_combinada, dicc_alumnos, dicc_materias):
             for codigo, materia in dicc_materias.items():
                     print(f'Codigo: {codigo}, Materia: {materia}')
             aux = 0
-    EscribirArchivo(matriz_combinada)
     return matriz_combinada
             
