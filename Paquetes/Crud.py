@@ -2,23 +2,23 @@ from random import *
 from .Login import *
 import json
 
-def ActualizarArchivoAlumno (dicc_alumnos): #Agg excepciones
+def ActualizarArchivoAlumno (dicc_alumnos, archivo): #Agg excepciones
     try:
-        with open('ArchivoAlumnos.json', 'w', encoding= 'UTF-8') as archivo :
-            json.dump(dicc_alumnos, archivo, ensure_ascii= False)
+        with open(archivo, 'w', encoding= 'UTF-8') as arch :
+            json.dump(dicc_alumnos, arch, ensure_ascii= False)
     except FileNotFoundError:
         print('No se encontro el archivo')
 
-def ActualizarArchivoMaterias (dicc_materias):
+def ActualizarArchivoMaterias (dicc_materias, archivo):
     try:
-        with open('ArchivoMaterias.json', 'w', encoding = 'UTF-8') as archivo:
-            json.dump(dicc_materias, archivo, ensure_ascii= False)
+        with open(archivo, 'w', encoding = 'UTF-8') as arch:
+            json.dump(dicc_materias, arch, ensure_ascii= False)
     except FileNotFoundError:
         print('No se encontro el archivo')
 
-def EscribirArchivo(matriz_combinada):
+def EscribirArchivo(matriz_combinada, archivo):
     try:
-        with open('ArchivoMatriz.txt', 'w', encoding= 'UTF-8') as arch:
+        with open(archivo, 'w', encoding= 'UTF-8') as arch:
             lineas = [f'{fila[0]};{fila[1]};{fila[2]};{fila[3]};{fila[4]}\n' for fila in matriz_combinada]
             arch.writelines(lineas)
         
