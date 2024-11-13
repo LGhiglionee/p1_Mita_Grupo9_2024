@@ -200,7 +200,7 @@ def agregar_nota(matriz_combinada, dicc_alumnos):
             elif parcialuno < 4 and parcialdos < 4:
                 alumno[4] = 'Recursa'
             elif  parcialuno < 4 or parcialdos < 4:
-                alumno[4]= 'Debe Recuperatorio'
+                alumno[4]= 'Debe recuperatorio'
             else:
                 final = input('Ingrese la nota del examen final (1-10 o "-" para no cambiar): ')
                 if final != '-':

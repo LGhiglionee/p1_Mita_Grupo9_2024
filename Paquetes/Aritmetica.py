@@ -33,6 +33,8 @@ def Promedio(matriz_combinada, dicc_alumnos, dicc_materias): #Lo que tengo pensa
                     print("El alumno ha promocionado la materia.")
                 elif final == 'Recursa':
                     print("El alumno debe recursar la materia.")
+                elif final == "Debe recuperatorio":
+                    print("El alumno debe un recuperatorio")
                 elif final != '-':
                     print(f"Nota del examen final: {final}")
                 else:
