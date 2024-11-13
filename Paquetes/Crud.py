@@ -83,7 +83,7 @@ def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias):
                 matriz_combinada.append(nuevo_ingreso)  # pone el nuevo alumno en la matriz combinada
                 aux = 0
                 print(f'Materia {materia} asignada correctamente.')
-                EscribirArchivo(matriz_combinada)
+                
                 return dicc_alumnos, matriz_combinada
             else:
                 print('No se encontró el código, intente nuevamente.')
@@ -199,6 +199,8 @@ def agregar_nota(matriz_combinada, dicc_alumnos):
                 alumno[4] = 'Promocion'
             elif parcialuno < 4 and parcialdos < 4:
                 alumno[4] = 'Recursa'
+            elif  parcialuno < 4 or parcialdos < 4:
+                alumno[4]= 'Debe Recuperatorio'
             else:
                 final = input('Ingrese la nota del examen final (1-10 o "-" para no cambiar): ')
                 if final != '-':
