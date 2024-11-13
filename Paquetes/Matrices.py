@@ -42,7 +42,7 @@ def crearmatriz (archivo, modo):
             codigo= int(codigo) if codigo!='-' else '-'
             parcial1 = int(parcial1) if parcial1 != '-' else '-'
             parcial2 = int(parcial2) if parcial2 != '-' else '-'
-            if final not in ['-', 'Debe recuperatorio', 'Promoción', 'Recursa', 'Promocion']:
+            if final not in ['-', 'Debe recuperatorio', 'Recursa', 'Promocion']:
                 final = int(final)
             else:
                 final = final              

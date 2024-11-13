@@ -47,7 +47,7 @@ def Promedio(matriz_combinada, dicc_alumnos, dicc_materias): #Lo que tengo pensa
     except ValueError:
         print(f'Hubo un problema, faltan notas de parciales')
     except TypeError:
-        print('Hubo un problema. Hay alguna/s instancia/s que no tiene nota cargada correctamente.')
+        print('Hubo un problema. Hay instancias que no tiene nota cargada correctamente.')
 
 def validarlegajo(dicc_alumnos):
     aux= 0
