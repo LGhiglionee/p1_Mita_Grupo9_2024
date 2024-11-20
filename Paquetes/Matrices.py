@@ -1,6 +1,10 @@
 import json
 
 def creardicc_alumnos(archivo, modo):
+    '''
+    Pre: Recibe archivo json alumnos
+    Pos: Devuelve dicc alumnos
+    '''
     diccalumnos = {}
     try:
         with open(archivo, modo, encoding= 'UTF-8') as ArchivoAlumnos:
@@ -17,6 +21,10 @@ def creardicc_alumnos(archivo, modo):
 
 
 def creardicc_materias(archivo, modo):
+    '''
+    Pre: Recibe archivo json materias
+    Pos: Devuelve dicc materias
+    '''
     dicc_materias = {}
     try:
         with open(archivo, modo, encoding= 'UTF-8') as ArchivoMateria:
@@ -31,6 +39,10 @@ def creardicc_materias(archivo, modo):
     return dicc_materias
  
 def crearmatriz (archivo, modo):
+    '''
+    Pre: Recibe archivo txt
+    Pos: Devuelve matriz hecha
+    '''
     matriz_combinada= []
     with open(archivo, modo, encoding='UTF-8') as arch:
         encabezado= arch.readline().strip().split(';')

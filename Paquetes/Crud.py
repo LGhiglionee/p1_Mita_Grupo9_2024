@@ -3,6 +3,10 @@ from .Login import *
 import json
 
 def ActualizarArchivoAlumno (dicc_alumnos, archivo): #Agg excepciones
+    '''
+    Pre: Recibe dicc alumnos
+    Pos: Convierte dicc en json (actualizacion)
+    '''
     try:
         with open(archivo, 'w', encoding= 'UTF-8') as arch :
             json.dump(dicc_alumnos, arch, ensure_ascii= False)
@@ -10,6 +14,10 @@ def ActualizarArchivoAlumno (dicc_alumnos, archivo): #Agg excepciones
         print('No se encontro el archivo')
 
 def ActualizarArchivoMaterias (dicc_materias, archivo):
+    '''
+    Pre: Recibe dicc materias
+    Pos: Convierte dicc en json (actualizacion)
+    '''
     try:
         with open(archivo, 'w', encoding = 'UTF-8') as arch:
             json.dump(dicc_materias, arch, ensure_ascii= False)
@@ -17,6 +25,10 @@ def ActualizarArchivoMaterias (dicc_materias, archivo):
         print('No se encontro el archivo')
 
 def EscribirArchivo(matriz_combinada, archivo):
+    '''
+    Pre: Recibe matriz combinada
+    Pos: Convierte matriz en archivo de txt
+    '''
     try:
         with open(archivo, 'w', encoding= 'UTF-8') as arch:
             lineas = [f'{fila[0]};{fila[1]};{fila[2]};{fila[3]};{fila[4]}\n' for fila in matriz_combinada]

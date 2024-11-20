@@ -1,6 +1,8 @@
-def Promedio(matriz_combinada, dicc_alumnos, dicc_materias): #Lo que tengo pensado
-                 #aca es agregar un alumno e informar cual es el promedio de alumno por 
-                 # materia que este anotado
+def Promedio(matriz_combinada, dicc_alumnos, dicc_materias): 
+    '''
+    Pre: ---
+    Pos: Devuelve promedio del alumno de la materia puesta
+    '''
     try:
         legajo = int(input('Ingrese el legajo del alumno que deseas saber su promedio: '))
         codigo_materia = int(input('Ingrese el código de la materia que desee saber su promedio: '))
@@ -59,6 +61,10 @@ def validarlegajo(dicc_alumnos):
             print('No se encontro al alumno')
 
 def Promedio_recursivo (matriz_combinada, promediomat, legajo, i=0):
+    '''
+    Pre: Recibe una lista vacia, legajo, etc
+    Pos: Devuelve lista con cada uno de los promedios POR materia
+    '''
     suma, cantnotas = 0,0
 
     if i == len(matriz_combinada): #cuando llega a la cantidad de notas para
@@ -80,6 +86,10 @@ def Promedio_recursivo (matriz_combinada, promediomat, legajo, i=0):
     return Promedio_recursivo(matriz_combinada, promediomat, legajo, i + 1)
 
 def Promediogen(promediomateria):
+    '''
+    Pre: Recibe lista de el promedio recursivo
+    Pos: Hace la suma, divide por la longitud y devuelve promedio
+    '''
     try:
         suma=0
         for i in promediomateria:
@@ -91,6 +101,10 @@ def Promediogen(promediomateria):
         return 0
 
 def ContarAprobados (matrizcombinada, dicc_materias):
+    '''
+    Pre: ---
+    Pos: Devuelve dos conjuntos, uno con los legajos de los que aprobaron, y otro de desaprobados
+    '''
     try:
         codigomat = int(input('Ingrese el codigo de la materia: '))
         aprobados = set()

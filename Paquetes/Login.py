@@ -1,6 +1,10 @@
 import re
 
 def validar_mail(mail):
+    '''
+    Pre: Recibe mail escrito por usuario
+    Pos: Devuelve, si es correcto, True, sino, False
+    '''
     # patron para validar un correo electrónico
     patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     if re.match(patron, mail):
@@ -9,12 +13,16 @@ def validar_mail(mail):
         return False
 
 def validar_fecha_nacimiento(fecha_nacimiento):
+    '''
+    Pre: Recibe fecha nacimiento escrito por usuario
+    Pos: Devuelve, si es correcto, True, sino, False
+    '''
     patron= r'^\d{2}/\d{2}/\d{4}$'
     if re.match(patron, fecha_nacimiento):
         dia , mes, ano = fecha_nacimiento.split('/')
-        day = int(dia)
-        month = int(mes)
-        if day <= 31 and month<=12:
+        dia_entero = int(dia)
+        mes_entero = int(mes)
+        if dia_entero <= 31 and mes_entero<=12:
             return True
         else:
             return False
