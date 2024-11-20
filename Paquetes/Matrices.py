@@ -14,8 +14,10 @@ def creardicc_alumnos(archivo, modo):
                 diccalumnos[leg] = info
     except FileNotFoundError:
         print('No se encontro el archivo.')
-    except:
-        print('Ocurrio un error.')
+    except ValueError:
+        print('Ocurrio un error al convertir el codigo a entero')
+    except Exception as msj:
+        print(f'Ocurrio un error, {msj}.')
     finally:
         return diccalumnos
 
@@ -34,7 +36,9 @@ def creardicc_materias(archivo, modo):
                 dicc_materias[cod] = info
     except FileNotFoundError:
         print('No se encontro el archivo.')
-    except:
+    except ValueError:
+        print('Ocurrio un error al convertir el codigo a entero')
+    except Exception:
         print('Ocurrio un error.')
     return dicc_materias
  
@@ -43,21 +47,29 @@ def crearmatriz (archivo, modo):
     Pre: Recibe archivo txt
     Pos: Devuelve matriz hecha
     '''
-    matriz_combinada= []
-    with open(archivo, modo, encoding='UTF-8') as arch:
-        encabezado= arch.readline().strip().split(';')
-        matriz_combinada.append(encabezado)
-        linea = arch.readline().strip()
-        while linea:
-            legajo, codigo, parcial1 , parcial2 , final = linea.split(';')
-            legajo = int(legajo)  #Paso todo a entero
-            codigo= int(codigo) if codigo!='-' else '-'
-            parcial1 = int(parcial1) if parcial1 != '-' else '-'
-            parcial2 = int(parcial2) if parcial2 != '-' else '-'
-            if final not in ['-', 'Debe recuperatorio', 'Recursa', 'Promocion']:
-                final = int(final)
-            else:
-                final = final              
-            matriz_combinada.append([legajo, codigo, parcial1, parcial2, final])
+    try:
+        matriz_combinada= []
+        with open(archivo, modo, encoding='UTF-8') as arch:
+            encabezado= arch.readline().strip().split(';')
+            matriz_combinada.append(encabezado)
             linea = arch.readline().strip()
-    return matriz_combinada
+            while linea:
+                legajo, codigo, parcial1 , parcial2 , final = linea.split(';')
+                legajo = int(legajo)  #Paso todo a entero
+                codigo= int(codigo) if codigo!='-' else '-'
+                parcial1 = int(parcial1) if parcial1 != '-' else '-'
+                parcial2 = int(parcial2) if parcial2 != '-' else '-'
+                if final not in ['-', 'Debe recuperatorio', 'Recursa', 'Promocion']:
+                    final = int(final)
+                else:
+                    final = final              
+                matriz_combinada.append([legajo, codigo, parcial1, parcial2, final])
+                linea = arch.readline().strip()
+        return matriz_combinada
+    except FileNotFoundError:
+        print('No se encontro el archivo')
+    except ValueError:
+        print('Hay un error con la conversion a entero')
+    except Exception:
+        print('Ocurrio un error')
+        

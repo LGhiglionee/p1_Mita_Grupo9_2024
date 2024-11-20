@@ -43,9 +43,9 @@ def registro(usuario):#registro de usuarios
             if usuario[nombre_usuario]['contrasena'] == contrasena:
                 print('su usuario ya cuenta con un registro')
                 print()
-                confirm = input('Desea cancelar su registro? [y/n]: ').lower()
+                confirm = input('Desea cancelar su registro? [s/n]: ').lower()
                 print()
-                if confirm in ['y', 'yes']:
+                if confirm in ['s', 'si']:
                     flag = 1
         else:
             usuario[nombre_usuario] = {'contrasena' : contrasena, 'mail' : mail}

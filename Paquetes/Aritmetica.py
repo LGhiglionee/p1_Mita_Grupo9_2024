@@ -3,7 +3,7 @@ def Promedio(matriz_combinada, dicc_alumnos, dicc_materias):
     Pre: ---
     Pos: Devuelve promedio del alumno de la materia puesta
     '''
-    try:
+    try:  
         legajo = int(input('Ingrese el legajo del alumno que deseas saber su promedio: '))
         codigo_materia = int(input('Ingrese el código de la materia que desee saber su promedio: '))
         
@@ -17,13 +17,7 @@ def Promedio(matriz_combinada, dicc_alumnos, dicc_materias):
                 
                 if parcial1 == '-' or parcial2 == '-':
                     raise ValueError
-                if final == 'Promocion':
-                    promedio = calculo(parcial1, parcial2)
-                elif final == 'Recursa':
-                    promedio = calculo(parcial1, parcial2)
-                elif final == 'Debe recuperatorio':
-                    promedio= calculo(parcial1, parcial2)
-                elif final == '-':
+                if final in ['Promocion', 'Recursa', 'Debe recuperatorio', '-']:
                     promedio = calculo(parcial1, parcial2)
                 else:
                     promedio_par = calculo_par(parcial1, parcial2)
@@ -31,7 +25,7 @@ def Promedio(matriz_combinada, dicc_alumnos, dicc_materias):
                 print(f'El promedio del alumno {dicc_alumnos[legajo][0]} {dicc_alumnos[legajo][1]} '
                       f'en la materia {dicc_materias[codigo_materia]} es {promedio}')
                 
-                if final == 'Promoción':
+                if final == 'Promocion':
                     print("El alumno ha promocionado la materia.")
                 elif final == 'Recursa':
                     print("El alumno debe recursar la materia.")

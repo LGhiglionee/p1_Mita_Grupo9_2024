@@ -84,8 +84,8 @@ def main():
                                         print('No existe una acción con el número ingresado. Por favor, ingrese del 1 al 4')
                                             
                             elif opcion == 4:
-                                aux = input('¿Desea ordenar de manera ascendente los alumnos? [y/n]: ').lower()
-                                if aux in ['y', 'yes']:
+                                aux = input('¿Desea ordenar de manera ascendente los alumnos? [s/n]: ').lower()
+                                if aux in ['si', 's']:
                                     matriz_ordenada = [matriz_combinada[0]] + sorted(matriz_combinada[1:], key=lambda x: x[0])
                                     tabla(matriz_ordenada)
                                 else:

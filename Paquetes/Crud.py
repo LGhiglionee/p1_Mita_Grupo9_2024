@@ -72,12 +72,12 @@ def agregar_alumno(dicc_alumnos, matriz_combinada, dicc_materias):
 
     dicc_alumnos[legajo] = [nombre, apellido, mail, fecha_nacimiento] #agrega alumno a dicc alumnos
 
-    entrada = input('Desea asignar una nueva materia a este alumno? [y/n] ').lower()
+    entrada = input('Desea asignar una nueva materia a este alumno? [s/n] ').lower()
     
-    while entrada not in ['y', 'n', 'yes', 'no']:
-        entrada = input('Recuerde ingresar las opciones que ve en pantalla [y/n]: ').lower()
+    while entrada not in ['s', 'n', 'si', 'no']:
+        entrada = input('Recuerde ingresar las opciones que ve en pantalla [s/n]: ').lower()
         
-    if entrada in ['y', 'yes']:
+    if entrada in ['s', 'si']:
         aux = 1
         while aux == 1:
             for codigo, materia in dicc_materias.items():
